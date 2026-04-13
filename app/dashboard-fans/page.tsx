@@ -151,6 +151,13 @@ export default function FanDashboardPage() {
             </div>
           </header>
 
+          {/* Mobile-only empty state instructions above cards */}
+          {!selectedTeam && (
+            <div className="mt-8 xl:hidden">
+              <EmptySelectionPanel />
+            </div>
+          )}
+
           <section className="mt-10 grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
             <div className="grid gap-6 lg:grid-cols-2">
               {teams.map((team) => {
@@ -254,7 +261,8 @@ export default function FanDashboardPage() {
                 </p>
 
                 <p className="mt-5 text-[15px] font-light leading-7 text-[#bab7b1]">
-                  This is the team you’re set to follow for the season. You’ll receive schedule updates, scoring alerts, and giveaways connected to this manager’s roster.
+                  This is the team you’re set to follow for the season. You’ll receive schedule updates, scoring alerts,
+                  and giveaways connected to this manager’s roster.
                 </p>
 
                 <div className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-1">
@@ -316,55 +324,62 @@ export default function FanDashboardPage() {
                 </div>
               </aside>
             ) : (
-              <aside className="h-fit border border-dashed border-[rgba(245,240,232,0.12)] bg-[rgba(245,240,232,0.02)] p-6 sm:p-7">
-                <div className="mb-4 inline-flex items-center gap-2 bg-[rgba(155,94,255,0.12)] px-3 py-2 font-(--font-space-mono) text-[10px] uppercase tracking-[2px] text-[#9B5EFF]">
-                  No Team Selected Yet
-                </div>
-
-                <h2 className="font-(--font-anton) text-[38px] uppercase leading-none tracking-[0.5px]">
-                  Pick A Team
-                </h2>
-
-                <p className="mt-5 text-[15px] font-light leading-7 text-[#bab7b1]">
-                  Start by reviewing the four manager teams on the left. Once you click{" "}
-                  <span className="text-[#f5f0e8]">Follow This Team</span>, your selected team will appear here with a
-                  preview of the roster and your confirmation action.
-                </p>
-
-                <div className="mt-6 grid gap-3">
-                  <div className="border border-[rgba(245,240,232,0.08)] bg-[rgba(245,240,232,0.025)] px-4 py-4">
-                    <div className="font-(--font-space-mono) text-[10px] uppercase tracking-[1.8px] text-[#9c9892]">
-                      Step 1
-                    </div>
-                    <div className="mt-2 font-(--font-anton) text-[24px] leading-none text-[#9B5EFF]">
-                      View Team
-                    </div>
-                  </div>
-
-                  <div className="border border-[rgba(245,240,232,0.08)] bg-[rgba(245,240,232,0.025)] px-4 py-4">
-                    <div className="font-(--font-space-mono) text-[10px] uppercase tracking-[1.8px] text-[#9c9892]">
-                      Step 2
-                    </div>
-                    <div className="mt-2 font-(--font-anton) text-[24px] leading-none text-[#FF3131]">
-                      Follow This Team
-                    </div>
-                  </div>
-
-                  <div className="border border-[rgba(245,240,232,0.08)] bg-[rgba(245,240,232,0.025)] px-4 py-4">
-                    <div className="font-(--font-space-mono) text-[10px] uppercase tracking-[1.8px] text-[#9c9892]">
-                      Step 3
-                    </div>
-                    <div className="mt-2 font-(--font-anton) text-[24px] leading-none text-[#3B7FFF]">
-                      Confirm Selection
-                    </div>
-                  </div>
-                </div>
+              <aside className="hidden xl:block">
+                <EmptySelectionPanel />
               </aside>
             )}
           </section>
         </div>
       </div>
     </main>
+  );
+}
+
+function EmptySelectionPanel() {
+  return (
+    <div className="h-fit border border-dashed border-[rgba(245,240,232,0.12)] bg-[rgba(245,240,232,0.02)] p-6 sm:p-7">
+      <div className="mb-4 inline-flex items-center gap-2 bg-[rgba(155,94,255,0.12)] px-3 py-2 font-(--font-space-mono) text-[10px] uppercase tracking-[2px] text-[#9B5EFF]">
+        No Team Selected Yet
+      </div>
+
+      <h2 className="font-(--font-anton) text-[38px] uppercase leading-none tracking-[0.5px]">
+        Pick A Team
+      </h2>
+
+      <p className="mt-5 text-[15px] font-light leading-7 text-[#bab7b1]">
+        Start by reviewing the four manager teams. Once you click <span className="text-[#f5f0e8]">Follow This Team</span>,
+        your selected team will appear here with a preview of the roster and your confirmation action.
+      </p>
+
+      <div className="mt-6 grid gap-3">
+        <div className="border border-[rgba(245,240,232,0.08)] bg-[rgba(245,240,232,0.025)] px-4 py-4">
+          <div className="font-(--font-space-mono) text-[10px] uppercase tracking-[1.8px] text-[#9c9892]">
+            Step 1
+          </div>
+          <div className="mt-2 font-(--font-anton) text-[24px] leading-none text-[#9B5EFF]">
+            View Team
+          </div>
+        </div>
+
+        <div className="border border-[rgba(245,240,232,0.08)] bg-[rgba(245,240,232,0.025)] px-4 py-4">
+          <div className="font-(--font-space-mono) text-[10px] uppercase tracking-[1.8px] text-[#9c9892]">
+            Step 2
+          </div>
+          <div className="mt-2 font-(--font-anton) text-[24px] leading-none text-[#FF3131]">
+            Follow This Team
+          </div>
+        </div>
+
+        <div className="border border-[rgba(245,240,232,0.08)] bg-[rgba(245,240,232,0.025)] px-4 py-4">
+          <div className="font-(--font-space-mono) text-[10px] uppercase tracking-[1.8px] text-[#9c9892]">
+            Step 3
+          </div>
+          <div className="mt-2 font-(--font-anton) text-[24px] leading-none text-[#3B7FFF]">
+            Confirm Selection
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
