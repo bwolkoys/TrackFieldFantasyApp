@@ -3,7 +3,11 @@
 import Link from "next/link";
 import { Anton, DM_Sans, Space_Mono } from "next/font/google";
 
-const anton = Anton({ subsets: ["latin"], weight: "400", variable: "--font-anton" });
+const anton = Anton({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-anton",
+});
 const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-dm-sans" });
 const spaceMono = Space_Mono({
   subsets: ["latin"],
@@ -151,7 +155,7 @@ export default function ManagerDashboardPage() {
         <div className="pointer-events-none absolute -right-[10%] -top-[10%] h-[120%] w-[34%] -skew-x-[8deg] bg-[rgba(255,224,48,0.04)]" />
 
         <div className="relative mx-auto max-w-7xl px-6 py-8 md:px-10 lg:px-12">
-          <header className="flex flex-col gap-6 border-b border-[rgba(245,240,232,0.08)] pb-8 md:flex-row md:items-end md:justify-between">
+          <header className="flex flex-col gap-6 border-b border-[rgba(245,240,232,0.08)] pb-8 md:flex-row md:items-start md:justify-between">
             <div>
               <div className="mb-5 flex items-center gap-3 font-(--font-space-mono) text-[11px] uppercase tracking-[4px] text-[#9B5EFF]">
                 <span className="block h-0.5 w-8 bg-[#9B5EFF]" />
@@ -160,17 +164,37 @@ export default function ManagerDashboardPage() {
               <h1 className="font-(--font-anton) text-[clamp(44px,6vw,88px)] uppercase leading-[0.92] tracking-[-1px]">
                 <span className="block">Team</span>
                 <span className="block text-[#9B5EFF]">Selection</span>
-                <span className="block text-transparent [WebkitTextStroke:2px_#f5f0e8]">Overview</span>
+                <span className="block text-transparent [WebkitTextStroke:2px_#f5f0e8]">
+                  Overview
+                </span>
               </h1>
               <p className="mt-5 max-w-170 text-[16px] font-light leading-7 text-[#c6c2bc]">
-                Review the four active teams, check each 15-athlete roster, and see how many fans have selected each team to follow.
+                Review the four active teams, check each 15-athlete roster, and
+                see how many fans have selected each team to follow.
               </p>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-3">
-              <MetricCard label="Active Teams" value="4" accent="#9B5EFF" />
-              <MetricCard label="Total Athletes" value="60" accent="#FF3131" />
-              <MetricCard label="Total Fan Picks" value="16,693" accent="#3B7FFF" />
+            <div className="flex flex-col gap-4 md:items-end">
+              <Link
+                href="/"
+                className="inline-flex items-center justify-center border border-[rgba(245,240,232,0.16)] px-5 py-3.5 font-(--font-space-mono) text-[11px] uppercase tracking-[2px] text-[#f5f0e8] transition-colors hover:border-[#f5f0e8] hover:text-[#9B5EFF]"
+              >
+                Home Page
+              </Link>
+
+              <div className="grid gap-4 sm:grid-cols-3">
+                <MetricCard label="Active Teams" value="4" accent="#9B5EFF" />
+                <MetricCard
+                  label="Total Athletes"
+                  value="60"
+                  accent="#FF3131"
+                />
+                <MetricCard
+                  label="Total Fan Picks"
+                  value="16,693"
+                  accent="#3B7FFF"
+                />
+              </div>
             </div>
           </header>
 
@@ -190,7 +214,10 @@ export default function ManagerDashboardPage() {
                     <div>
                       <div
                         className="mb-3 inline-flex items-center gap-2 px-3 py-2 font-(--font-space-mono) text-[10px] uppercase tracking-[2px]"
-                        style={{ backgroundColor: `${team.accent}1F`, color: team.accent }}
+                        style={{
+                          backgroundColor: `${team.accent}1F`,
+                          color: team.accent,
+                        }}
                       >
                         Rank #{team.rank}
                       </div>
@@ -203,8 +230,16 @@ export default function ManagerDashboardPage() {
                     </div>
 
                     <div className="grid min-w-[52.5 gap-3 sm:grid-cols-2 md:grid-cols-1">
-                      <StatPill label="Fans Picking Team" value={team.fanCount.toLocaleString()} accent={team.accent} />
-                      <StatPill label="Athletes On Roster" value={team.athletes.length.toString()} accent={team.accent} />
+                      <StatPill
+                        label="Fans Picking Team"
+                        value={team.fanCount.toLocaleString()}
+                        accent={team.accent}
+                      />
+                      <StatPill
+                        label="Athletes On Roster"
+                        value={team.athletes.length.toString()}
+                        accent={team.accent}
+                      />
                     </div>
                   </div>
 
@@ -237,7 +272,9 @@ export default function ManagerDashboardPage() {
                             <div className="truncate font-(--font-space-mono) text-[11px] uppercase tracking-[1.3px] text-[#f5f0e8]">
                               {athlete}
                             </div>
-                            <div className="mt-1 text-xs text-[#8f8b85]">Track &amp; Field Athlete</div>
+                            <div className="mt-1 text-xs text-[#8f8b85]">
+                              Track &amp; Field Athlete
+                            </div>
                           </div>
                         </div>
                       ))}
@@ -254,7 +291,9 @@ export default function ManagerDashboardPage() {
                 <div className="mb-3 font-(--font-space-mono) text-[11px] uppercase tracking-[2px] text-[#9B5EFF]">
                   Quick Actions
                 </div>
-                <h2 className="font-(--font-anton) text-[32px] uppercase leading-none">Manager Tools</h2>
+                <h2 className="font-(--font-anton) text-[32px] uppercase leading-none">
+                  Manager Tools
+                </h2>
               </div>
 
               <div className="flex flex-wrap gap-3">
@@ -293,7 +332,10 @@ function MetricCard({
       <div className="font-(--font-space-mono) text-[10px] uppercase tracking-[2px] text-[#9c9892]">
         {label}
       </div>
-      <div className="mt-2 font-(--font-anton) text-[34px] leading-none" style={{ color: accent }}>
+      <div
+        className="mt-2 font-(--font-anton) text-[34px] leading-none"
+        style={{ color: accent }}
+      >
         {value}
       </div>
     </div>
@@ -314,7 +356,10 @@ function StatPill({
       <div className="font-(--font-space-mono) text-[10px] uppercase tracking-[1.8px] text-[#9c9892]">
         {label}
       </div>
-      <div className="mt-2 font-(--font-anton) text-[30px] leading-none" style={{ color: accent }}>
+      <div
+        className="mt-2 font-(--font-anton) text-[30px] leading-none"
+        style={{ color: accent }}
+      >
         {value}
       </div>
     </div>
