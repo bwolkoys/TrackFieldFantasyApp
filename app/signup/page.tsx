@@ -80,7 +80,7 @@ export default function SignupPage() {
 
               <h1 className="mb-8 font-(--font-anton) text-[clamp(54px,7vw,102px)] uppercase leading-[0.92] tracking-[-1px]">
                 <span className="block">Choose</span>
-                <span className="block text-[#9B5EFF]">Your</span>
+                <span className="block text-[#9B5EFF]">Yours</span>
                 <span className="block text-transparent [WebkitTextStroke:2px_#f5f0e8]">Access</span>
               </h1>
 
@@ -167,7 +167,7 @@ function FanSignupForm() {
       return;
     }
 
-    router.push("/dashboard");
+    router.push("/dashboard-fans");
   };
 
   return (
@@ -246,7 +246,7 @@ function ManagerSigninForm() {
     e.preventDefault();
 
     if (email === TEST_MANAGER.email && password === TEST_MANAGER.password) {
-      router.push("/dashboard");
+      router.push("/dashboard-managers");
     } else {
       alert("Invalid manager credentials");
     }
