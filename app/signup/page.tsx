@@ -157,12 +157,11 @@ function FanSignupForm() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [favoriteEvent, setFavoriteEvent] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!firstName || !lastName || !email || !password || !favoriteEvent) {
+    if (!firstName || !lastName || !email || !password) {
       alert("Please fill out all fields");
       return;
     }
