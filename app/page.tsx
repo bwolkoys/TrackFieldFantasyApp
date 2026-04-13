@@ -78,21 +78,21 @@ export default function FielddayPage() {
 
   return (
     <div
-      className={`${anton.variable} ${dmSans.variable} ${spaceMono.variable} bg-[#0a0a0a] text-[#f5f0e8] overflow-x-hidden scroll-smooth cursor-none font-(--font-dm-sans)`}
+      className={`${anton.variable} ${dmSans.variable} ${spaceMono.variable} bg-[#0a0a0a] text-[#f5f0e8] overflow-x-hidden scroll-smooth cursor-none font-[var(--font-dm-sans)]`}
     >
       <div
-        className="pointer-events-none fixed z-9999 h-3 w-3 rounded-full bg-[#9B5EFF] mix-blend-difference transition-transform duration-150 ease-out"
+        className="pointer-events-none fixed z-[9999] h-3 w-3 rounded-full bg-[#9B5EFF] mix-blend-difference transition-transform duration-150 ease-out"
         style={{ left: mouse.x - 6, top: mouse.y - 6 }}
       />
       <div
-        className="pointer-events-none fixed z-9998 h-9 w-9 rounded-full border border-[#9B5EFF] mix-blend-difference transition-all duration-300"
+        className="pointer-events-none fixed z-[9998] h-9 w-9 rounded-full border border-[#9B5EFF] mix-blend-difference transition-all duration-300"
         style={{ left: ring.x, top: ring.y }}
       />
 
-      <nav className="fixed left-0 right-0 top-0 z-100 flex items-center justify-between px-12 py-5 mix-blend-normal">
+      <nav className="fixed left-0 right-0 top-0 z-[100] flex items-center justify-between px-12 py-5 mix-blend-normal">
         <a
           href="#"
-          className="font-(--font-anton) text-[22px] tracking-[4px] text-[#9B5EFF] no-underline"
+          className="font-[var(--font-anton)] text-[22px] tracking-[4px] text-[#9B5EFF] no-underline"
         >
           FIELDDAY
         </a>
@@ -106,7 +106,7 @@ export default function FielddayPage() {
             <li key={label}>
               <a
                 href={href}
-                className="font-(--font-space-mono) text-[11px] uppercase tracking-[2px] text-[#bab7b1] no-underline transition-colors duration-200 hover:text-[#9B5EFF]"
+                className="font-[var(--font-space-mono)] text-[11px] uppercase tracking-[2px] text-[#bab7b1] no-underline transition-colors duration-200 hover:text-[#9B5EFF]"
               >
                 {label}
               </a>
@@ -114,33 +114,33 @@ export default function FielddayPage() {
           ))}
         </ul>
 
-        <button className="bg-[#9B5EFF] px-5.5 py-2.5 font-bold text-[11px] uppercase tracking-[2px] text-[#0a0a0a] transition duration-200 hover:scale-[1.03] hover:bg-[#f5f0e8]">
+        <button className="bg-[#9B5EFF] px-[22px] py-[10px] font-[var(--font-space-mono)] text-[11px] font-bold uppercase tracking-[2px] text-[#0a0a0a] transition duration-200 hover:scale-[1.03] hover:bg-[#f5f0e8]">
           Join Waitlist
         </button>
       </nav>
 
       <section className="relative grid min-h-screen overflow-hidden lg:grid-cols-2">
-        <div className="relative z-2 flex flex-col justify-center px-12 pb-20 pt-35">
-          <div className="mb-7 flex items-center gap-3 font-(--font-space-mono) text-[11px] uppercase tracking-[4px] text-[#9B5EFF]">
-            <span className="block h-0.5 w-8 bg-[#9B5EFF]" />
+        <div className="relative z-[2] flex flex-col justify-center px-12 pb-20 pt-[140px]">
+          <div className="mb-7 flex items-center gap-3 font-[var(--font-space-mono)] text-[11px] uppercase tracking-[4px] text-[#9B5EFF]">
+            <span className="block h-[2px] w-8 bg-[#9B5EFF]" />
             Fantasy Track &amp; Field
           </div>
 
-          <h1 className="mb-9 font-(--font-anton) text-[clamp(72px,8vw,120px)] uppercase leading-[0.92] tracking-[-1px]">
+          <h1 className="mb-9 font-[var(--font-anton)] text-[clamp(72px,8vw,120px)] uppercase leading-[0.92] tracking-[-1px]">
             <span className="block">Own The</span>
             <span className="block text-[#9B5EFF]">Season</span>
             <span className="block text-transparent [WebkitTextStroke:2px_#f5f0e8]">Live</span>
           </h1>
 
-          <p className="mb-12 max-w-100 text-[17px] font-light leading-[1.65] text-[#c6c2bc]">
+          <p className="mb-12 max-w-[400px] text-[17px] font-light leading-[1.65] text-[#c6c2bc]">
             Build your squad, follow elite athlete managers, and score points in real time during the Diamond League season.
           </p>
 
           <div className="flex flex-wrap items-center gap-5">
-            <button className="btn-primary relative overflow-hidden px-10 py-4.5 font-(--font-anton) text-base uppercase tracking-[3px] text-[#0a0a0a] transition-transform duration-200 hover:-translate-y-0.5">
+            <button className="btn-primary relative overflow-hidden px-10 py-[18px] font-[var(--font-anton)] text-base uppercase tracking-[3px] text-[#0a0a0a] transition-transform duration-200 hover:-translate-y-[2px]">
               Pick Your Team
             </button>
-            <button className="border border-[rgba(245,240,232,0.3)] bg-transparent px-8 py-4.5 font-(--font-space-mono) text-xs uppercase tracking-[2px] text-[#f5f0e8] transition-colors duration-200 hover:border-[#f5f0e8] hover:text-[#9B5EFF]">
+            <button className="border border-[rgba(245,240,232,0.3)] bg-transparent px-8 py-[18px] font-[var(--font-space-mono)] text-xs uppercase tracking-[2px] text-[#f5f0e8] transition-colors duration-200 hover:border-[#f5f0e8] hover:text-[#9B5EFF]">
               See How It Works
             </button>
           </div>
@@ -152,8 +152,8 @@ export default function FielddayPage() {
               ["06.01", "Soft Launch"],
             ].map(([num, label]) => (
               <div key={label}>
-                <div className="font-(--font-anton) text-4xl leading-none text-[#9B5EFF]">{num}</div>
-                <div className="mt-1 font-(--font-space-mono) text-[10px] uppercase tracking-[2px] text-[#a3a09a]">
+                <div className="font-[var(--font-anton)] text-4xl leading-none text-[#9B5EFF]">{num}</div>
+                <div className="mt-1 font-[var(--font-space-mono)] text-[10px] uppercase tracking-[2px] text-[#a3a09a]">
                   {label}
                 </div>
               </div>
@@ -179,10 +179,10 @@ export default function FielddayPage() {
             </svg>
           </div>
 
-          <div className="pointer-events-none absolute -right-[5%] -top-[10%] h-[120%] w-[55%] -skew-x-6 bg-[rgba(255,224,48,0.03)]" />
-          <div className="absolute bottom-0 left-0 right-0 h-[35%] bg-linear-to-t from-[rgba(255,224,48,0.04)] to-transparent" />
+          <div className="pointer-events-none absolute -right-[5%] -top-[10%] h-[120%] w-[55%] -skew-x-[6deg] bg-[rgba(255,224,48,0.03)]" />
+          <div className="absolute bottom-0 left-0 right-0 h-[35%] bg-gradient-to-t from-[rgba(255,224,48,0.04)] to-transparent" />
 
-          <div className="absolute bottom-10 left-5 right-5 h-45">
+          <div className="absolute bottom-10 left-[-20px] right-[-20px] h-[180px]">
             <svg viewBox="0 0 900 180" className="h-full w-full">
               <g fill="none" stroke="rgba(245,240,232,0.22)" strokeWidth="2">
                 <path d="M-40 160 C 180 40, 520 40, 940 160" />
@@ -194,7 +194,7 @@ export default function FielddayPage() {
           </div>
 
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="relative h-100 w-75">
+            <div className="relative h-[400px] w-[300px]">
               {[
                 { name: "Gabby Thomas", event: "Sprints", points: "128", top: "top-0 left-0", border: "border-t-[3px] border-t-[#9B5EFF]", delay: "0s" },
                 { name: "Mondo Duplantis", event: "Pole Vault", points: "114", top: "top-20 left-[60px]", border: "border-t-[3px] border-t-[#FF3131]", delay: "1s" },
@@ -202,16 +202,16 @@ export default function FielddayPage() {
               ].map((card) => (
                 <div
                   key={card.name}
-                  className={`athlete-card-hero absolute w-55 border border-[rgba(245,240,232,0.12)] bg-[rgba(245,240,232,0.04)] p-6 backdrop-blur-[10px] ${card.top} ${card.border}`}
+                  className={`athlete-card-hero absolute w-[220px] border border-[rgba(245,240,232,0.12)] bg-[rgba(245,240,232,0.04)] p-6 backdrop-blur-[10px] ${card.top} ${card.border}`}
                   style={{ animationDelay: card.delay }}
                 >
-                  <div className="mb-1 font-(--font-anton) text-lg tracking-[1px]">{card.name}</div>
-                  <div className="mb-4 font-(--font-space-mono) text-[10px] uppercase tracking-[2px] text-[#9B5EFF]">
+                  <div className="mb-1 font-[var(--font-anton)] text-lg tracking-[1px]">{card.name}</div>
+                  <div className="mb-4 font-[var(--font-space-mono)] text-[10px] uppercase tracking-[2px] text-[#9B5EFF]">
                     {card.event}
                   </div>
                   <div className="flex items-center justify-between">
-                    <div className="font-(--font-anton) text-[32px] text-[#9B5EFF]">{card.points}</div>
-                    <div className="font-(--font-space-mono) text-[10px] uppercase tracking-[1px] text-[#a3a09a]">
+                    <div className="font-[var(--font-anton)] text-[32px] text-[#9B5EFF]">{card.points}</div>
+                    <div className="font-[var(--font-space-mono)] text-[10px] uppercase tracking-[1px] text-[#a3a09a]">
                       Total Pts
                     </div>
                   </div>
@@ -222,16 +222,16 @@ export default function FielddayPage() {
         </div>
       </section>
 
-      <section id="how-it-works" className="relative px-12 py-30">
-        <div className="mb-5 flex items-center gap-3 font-(--font-space-mono) text-[11px] uppercase tracking-[4px] text-[#9B5EFF]">
-          <span className="block h-0.5 w-6 bg-[#9B5EFF]" />
+      <section id="how-it-works" className="relative px-12 py-[120px]">
+        <div className="mb-5 flex items-center gap-3 font-[var(--font-space-mono)] text-[11px] uppercase tracking-[4px] text-[#9B5EFF]">
+          <span className="block h-[2px] w-6 bg-[#9B5EFF]" />
           How It Works
         </div>
-        <h2 className="mb-16 font-(--font-anton) text-[clamp(40px,5vw,72px)] uppercase leading-[0.95]">
+        <h2 className="mb-16 font-[var(--font-anton)] text-[clamp(40px,5vw,72px)] uppercase leading-[0.95]">
           Pick. Follow. <br /> Score.
         </h2>
 
-        <div className="grid gap-0.5 lg:grid-cols-3">
+        <div className="grid gap-[2px] lg:grid-cols-3">
           {[
             {
               num: "01",
@@ -260,26 +260,26 @@ export default function FielddayPage() {
               className="group relative overflow-hidden border border-[rgba(245,240,232,0.08)] bg-[rgba(245,240,232,0.03)] px-9 py-12 transition-colors duration-300 hover:bg-[rgba(245,240,232,0.06)]"
               data-num={step.num}
             >
-              <div className="pointer-events-none absolute -right-5 -top-5 font-(--font-anton) text-[120px] leading-none opacity-[0.04]">
+              <div className="pointer-events-none absolute -right-5 -top-5 font-[var(--font-anton)] text-[120px] leading-none opacity-[0.04]">
                 {step.num}
               </div>
               <div className={`mb-7 flex h-12 w-12 items-center justify-center text-2xl text-[#0a0a0a] ${step.iconClass}`}>
                 {step.icon}
               </div>
-              <h3 className="mb-4 font-(--font-anton) text-2xl uppercase tracking-[1px]">{step.title}</h3>
+              <h3 className="mb-4 font-[var(--font-anton)] text-2xl uppercase tracking-[1px]">{step.title}</h3>
               <p className="text-[15px] font-light leading-[1.7] text-[#afaba5]">{step.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section id="managers" className="overflow-hidden bg-[#f5f0e8] py-30 text-[#0a0a0a]">
+      <section id="managers" className="overflow-hidden bg-[#f5f0e8] py-[120px] text-[#0a0a0a]">
         <div className="px-12">
-          <div className="mb-5 flex items-center gap-3 font-(--font-space-mono) text-[11px] uppercase tracking-[4px] text-[#FF3131]">
-            <span className="block h-0.5 w-6 bg-[#FF3131]" />
+          <div className="mb-5 flex items-center gap-3 font-[var(--font-space-mono)] text-[11px] uppercase tracking-[4px] text-[#FF3131]">
+            <span className="block h-[2px] w-6 bg-[#FF3131]" />
             Athlete Managers
           </div>
-          <h2 className="font-(--font-anton) text-[clamp(40px,5vw,72px)] uppercase leading-[0.95]">
+          <h2 className="font-[var(--font-anton)] text-[clamp(40px,5vw,72px)] uppercase leading-[0.95]">
             The People <br /> Picking The Teams
           </h2>
         </div>
@@ -293,13 +293,13 @@ export default function FielddayPage() {
               >
                 <div className="flex items-center gap-4">
                   <div
-                    className={`flex h-13 w-13 shrink-0 items-center justify-center rounded-full font-(--font-anton) text-lg ${manager.avatarClass}`}
+                    className={`flex h-[52px] w-[52px] shrink-0 items-center justify-center rounded-full font-[var(--font-anton)] text-lg ${manager.avatarClass}`}
                   >
                     {manager.initials}
                   </div>
                   <div>
-                    <div className="font-(--font-anton) text-xl tracking-[0.5px]">{manager.name}</div>
-                    <div className="font-(--font-space-mono) text-[10px] uppercase tracking-[1px] text-[#97948f]">
+                    <div className="font-[var(--font-anton)] text-xl tracking-[0.5px]">{manager.name}</div>
+                    <div className="font-[var(--font-space-mono)] text-[10px] uppercase tracking-[1px] text-[#97948f]">
                       {manager.event}
                     </div>
                   </div>
@@ -310,12 +310,12 @@ export default function FielddayPage() {
         </div>
       </section>
 
-      <section id="teams" className="relative overflow-hidden px-12 py-30">
-        <div className="mb-5 flex items-center gap-3 font-(--font-space-mono) text-[11px] uppercase tracking-[4px] text-[#9B5EFF]">
-          <span className="block h-0.5 w-6 bg-[#9B5EFF]" />
+      <section id="teams" className="relative overflow-hidden px-12 py-[120px]">
+        <div className="mb-5 flex items-center gap-3 font-[var(--font-space-mono)] text-[11px] uppercase tracking-[4px] text-[#9B5EFF]">
+          <span className="block h-[2px] w-6 bg-[#9B5EFF]" />
           Teams
         </div>
-        <h2 className="font-(--font-anton) text-[clamp(40px,5vw,72px)] uppercase leading-[0.95]">
+        <h2 className="font-[var(--font-anton)] text-[clamp(40px,5vw,72px)] uppercase leading-[0.95]">
           Follow Your <br /> Favorite Squad
         </h2>
 
@@ -323,19 +323,19 @@ export default function FielddayPage() {
           {teams.map((team) => (
             <div
               key={team.name}
-              className={`group relative overflow-hidden border border-[rgba(245,240,232,0.1)] bg-[rgba(245,240,232,0.03)] px-6 py-8 transition duration-300 hover:-translate-y-1.5 ${team.accent}`}
+              className={`group relative overflow-hidden border border-[rgba(245,240,232,0.1)] bg-[rgba(245,240,232,0.03)] px-6 py-8 transition duration-300 hover:-translate-y-[6px] ${team.accent}`}
             >
-              <div className="mb-3 font-(--font-space-mono) text-[10px] uppercase tracking-[2px] text-[#9B5EFF]">
+              <div className="mb-3 font-[var(--font-space-mono)] text-[10px] uppercase tracking-[2px] text-[#9B5EFF]">
                 Managed By {team.manager}
               </div>
-              <h3 className="mb-5 font-(--font-anton) text-[30px] uppercase leading-none tracking-[0.5px]">
+              <h3 className="mb-5 font-[var(--font-anton)] text-[30px] uppercase leading-none tracking-[0.5px]">
                 {team.name}
               </h3>
               <div className="space-y-3">
                 {team.athletes.map((athlete) => (
                   <div
                     key={athlete}
-                    className="border-b border-[rgba(245,240,232,0.08)] pb-3 font-(--font-space-mono) text-xs uppercase tracking-[1.5px] text-[#c6c2bc]"
+                    className="border-b border-[rgba(245,240,232,0.08)] pb-3 font-[var(--font-space-mono)] text-xs uppercase tracking-[1.5px] text-[#c6c2bc]"
                   >
                     {athlete}
                   </div>
@@ -396,3 +396,4 @@ export default function FielddayPage() {
     </div>
   );
 }
+
