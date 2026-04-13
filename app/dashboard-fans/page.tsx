@@ -131,7 +131,7 @@ export default function FanDashboardPage() {
               </div>
               <h1 className="font-(--font-anton) text-[clamp(44px,6vw,88px)] uppercase leading-[0.92] tracking-[-1px]">
                 <span className="block">Choose The</span>
-                <span className="block text-[#9B5EFF]">Team You’ll</span>
+                <span className="block text-[#9B5EFF]">Team You’ll Follow</span>
                 <span className="block text-transparent [WebkitTextStroke:2px_#f5f0e8]">Follow</span>
               </h1>
               <p className="mt-5 max-w-170 text-[16px] font-light leading-7 text-[#c6c2bc]">
