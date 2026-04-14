@@ -46,7 +46,6 @@ const managers: Manager[] = [
     name: "Mondo Duplantis",
     shortName: "MD",
     accent: "#9B5EFF",
-    image: "",
     teamName: "Team Mondo",
     score: 124,
     fans: "4,821",
