@@ -124,22 +124,22 @@ const highlights: Highlight[] = [
   {
     athlete: "Noah Lyles",
     summary: "Sprint superstar. Watch the finishes that change the standings.",
-    image: "#3B7FFF",
+    image: "/managers-headshots/noah.png",
   },
   {
     athlete: "Gabby Thomas",
     summary: "Smooth speed, huge races, and high-value points.",
-    image: "#FF3131",
+    image: "/managers-headshots/gabby.png",
   },
   {
     athlete: "Rai Benjamin",
     summary: "One of the most dangerous closers in the sport.",
-    image: "#00D26A",
+    image: "/managers-headshots/rai.png",
   },
   {
     athlete: "Mondo Duplantis",
     summary: "Big-air moments that can swing an entire week.",
-    image: "#9B5EFF",
+    image: "/managers-headshots/mondo.png",
   },
 ];
 
@@ -304,9 +304,9 @@ export default function HomePage() {
                   className="group block border border-[rgba(245,240,232,0.10)] bg-[rgba(245,240,232,0.03)] p-5 transition-colors hover:bg-[rgba(245,240,232,0.05)]"
                 >
                   <div
-                    className="mb-5 h-44 w-full bg-[rgba(245,240,232,0.03)]"
+                    className="mb-5 h-44 w-full bg-cover bg-center"
                     style={{
-                      boxShadow: `inset 0 0 0 1px rgba(245,240,232,0.08), inset 0 0 120px ${highlight.image}22`,
+                      backgroundImage: `url(${highlight.image})`,
                     }}
                   />
                   <h3 className="font-(--font-anton) text-[28px] uppercase leading-none tracking-[0.4px]">
@@ -420,7 +420,6 @@ export default function HomePage() {
               />
             </div>
           </section>
-
 
           <section className="py-20">
             <div className="border border-[rgba(245,240,232,0.10)] bg-[rgba(245,240,232,0.03)] p-8 sm:p-10">
