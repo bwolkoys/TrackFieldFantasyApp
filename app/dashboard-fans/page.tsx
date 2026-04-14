@@ -12,6 +12,11 @@ const spaceMono = Space_Mono({
   variable: "--font-space-mono",
 });
 
+type AthletePreview = {
+  name: string;
+  score: number;
+};
+
 type Team = {
   id: string;
   teamName: string;
@@ -19,7 +24,8 @@ type Team = {
   eventFocus: string;
   accent: string;
   fanCount: number;
-  athletes: string[];
+  teamScore: number;
+  athletes: AthletePreview[];
   href: string;
 };
 
@@ -31,14 +37,15 @@ const teams: Team[] = [
     eventFocus: "Power + precision picks",
     accent: "#9B5EFF",
     fanCount: 4821,
+    teamScore: 124,
     href: "/dashboard-fans/team-mondo",
     athletes: [
-      "Mondo Duplantis",
-      "Cole Hocker",
-      "Katie Moon",
-      "Rai Benjamin",
-      "Ryan Crouser",
-      "Grant Fisher",
+      { name: "Mondo Duplantis", score: 28 },
+      { name: "Cole Hocker", score: 22 },
+      { name: "Katie Moon", score: 18 },
+      { name: "Rai Benjamin", score: 24 },
+      { name: "Ryan Crouser", score: 20 },
+      { name: "Grant Fisher", score: 12 },
     ],
   },
   {
@@ -48,14 +55,15 @@ const teams: Team[] = [
     eventFocus: "Sprint-heavy favorites",
     accent: "#FF3131",
     fanCount: 4360,
+    teamScore: 118,
     href: "/dashboard-fans/team-gabby",
     athletes: [
-      "Gabby Thomas",
-      "Noah Lyles",
-      "Sha'Carri Richardson",
-      "Josh Kerr",
-      "Grant Holloway",
-      "Yared Nuguse",
+      { name: "Gabby Thomas", score: 26 },
+      { name: "Noah Lyles", score: 25 },
+      { name: "Sha'Carri Richardson", score: 21 },
+      { name: "Josh Kerr", score: 17 },
+      { name: "Grant Holloway", score: 16 },
+      { name: "Yared Nuguse", score: 13 },
     ],
   },
   {
@@ -65,14 +73,15 @@ const teams: Team[] = [
     eventFocus: "Big personalities, big points",
     accent: "#3B7FFF",
     fanCount: 3988,
+    teamScore: 110,
     href: "/dashboard-fans/team-noah",
     athletes: [
-      "Noah Lyles",
-      "Melissa Jefferson-Wooden",
-      "Kenny Bednarek",
-      "Fred Kerley",
-      "Valarie Allman",
-      "Anna Hall",
+      { name: "Noah Lyles", score: 27 },
+      { name: "Melissa Jefferson-Wooden", score: 16 },
+      { name: "Kenny Bednarek", score: 18 },
+      { name: "Fred Kerley", score: 17 },
+      { name: "Valarie Allman", score: 15 },
+      { name: "Anna Hall", score: 17 },
     ],
   },
   {
@@ -82,14 +91,15 @@ const teams: Team[] = [
     eventFocus: "Championship depth",
     accent: "#00D26A",
     fanCount: 3524,
+    teamScore: 102,
     href: "/dashboard-fans/team-rai",
     athletes: [
-      "Rai Benjamin",
-      "Karsten Warholm",
-      "Sydney McLaughlin-Levrone",
-      "Joe Kovacs",
-      "Tara Davis-Woodhall",
-      "Valarie Allman",
+      { name: "Rai Benjamin", score: 24 },
+      { name: "Karsten Warholm", score: 23 },
+      { name: "Sydney McLaughlin-Levrone", score: 20 },
+      { name: "Joe Kovacs", score: 12 },
+      { name: "Tara Davis-Woodhall", score: 13 },
+      { name: "Valarie Allman", score: 10 },
     ],
   },
 ];
@@ -128,7 +138,7 @@ export default function FanDashboardPage() {
         <div className="pointer-events-none absolute -right-[10%] -top-[10%] h-[120%] w-[34%] -skew-x-[8deg] bg-[rgba(255,224,48,0.04)]" />
 
         <div className="relative mx-auto max-w-7xl px-6 py-8 md:px-10 lg:px-12">
-          <header className="flex flex-col gap-6 border-b border-[rgba(245,240,232,0.08)] pb-8 md:flex-row md:items-end md:justify-between">
+          <header className="flex flex-col gap-6 border-b border-[rgba(245,240,232,0.08)] pb-8 md:flex-row md:items-start md:justify-between">
             <div>
               <div className="mb-5 flex items-center gap-3 font-(--font-space-mono) text-[11px] uppercase tracking-[4px] text-[#9B5EFF]">
                 <span className="block h-0.5 w-8 bg-[#9B5EFF]" />
@@ -144,14 +154,22 @@ export default function FanDashboardPage() {
               </p>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-3">
-              <MetricCard label="Available Teams" value="4" accent="#9B5EFF" />
-              <MetricCard label="Managers" value="4" accent="#FF3131" />
-              <MetricCard label="Season Selection" value="Open" accent="#3B7FFF" />
+            <div className="flex flex-col gap-4 md:items-end">
+              <Link
+                href="/"
+                className="inline-flex items-center justify-center border border-[rgba(245,240,232,0.16)] px-5 py-3.5 font-(--font-space-mono) text-[11px] uppercase tracking-[2px] text-[#f5f0e8] transition-colors hover:border-[#f5f0e8] hover:text-[#9B5EFF]"
+              >
+                Back to Homepage
+              </Link>
+
+              <div className="grid gap-4 sm:grid-cols-3">
+                <MetricCard label="Available Teams" value="4" accent="#9B5EFF" />
+                <MetricCard label="Managers" value="4" accent="#FF3131" />
+                <MetricCard label="Season Selection" value="Open" accent="#3B7FFF" />
+              </div>
             </div>
           </header>
 
-          {/* Mobile-only empty state instructions above cards */}
           {!selectedTeam && (
             <div className="mt-8 xl:hidden">
               <EmptySelectionPanel />
@@ -202,8 +220,12 @@ export default function FanDashboardPage() {
                     </div>
 
                     <div className="mt-6 grid grid-cols-2 gap-3">
+                      <StatPill label="Team Score" value={team.teamScore.toString()} accent={team.accent} />
                       <StatPill label="Fans Following" value={team.fanCount.toLocaleString()} accent={team.accent} />
-                      <StatPill label="Roster Size" value="15" accent={team.accent} />
+                    </div>
+
+                    <div className="mt-3 font-(--font-space-mono) text-[10px] uppercase tracking-[1.6px] text-[#8f8b85]">
+                      Top 10 athletes count toward total score
                     </div>
 
                     <div className="mt-6">
@@ -213,10 +235,15 @@ export default function FanDashboardPage() {
                       <div className="grid gap-2 sm:grid-cols-2">
                         {team.athletes.map((athlete) => (
                           <div
-                            key={athlete}
-                            className="border border-[rgba(245,240,232,0.08)] bg-[rgba(245,240,232,0.025)] px-3 py-3 font-(--font-space-mono) text-[11px] uppercase tracking-[1.3px] text-[#f5f0e8]"
+                            key={athlete.name}
+                            className="flex items-center justify-between gap-3 border border-[rgba(245,240,232,0.08)] bg-[rgba(245,240,232,0.025)] px-3 py-3"
                           >
-                            {athlete}
+                            <div className="min-w-0 font-(--font-space-mono) text-[11px] uppercase tracking-[1.3px] text-[#f5f0e8]">
+                              {athlete.name}
+                            </div>
+                            <div className="shrink-0 font-(--font-anton) text-[22px] leading-none" style={{ color: team.accent }}>
+                              +{athlete.score}
+                            </div>
                           </div>
                         ))}
                       </div>
@@ -266,6 +293,7 @@ export default function FanDashboardPage() {
                 </p>
 
                 <div className="mt-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-1">
+                  <StatPill label="Team Score" value={selectedTeam.teamScore.toString()} accent={selectedTeam.accent} />
                   <StatPill
                     label="Fans On Team"
                     value={selectedTeam.fanCount.toLocaleString()}
@@ -281,17 +309,26 @@ export default function FanDashboardPage() {
                   <div className="space-y-2">
                     {selectedTeam.athletes.map((athlete, index) => (
                       <div
-                        key={athlete}
-                        className="flex items-center gap-3 border border-[rgba(245,240,232,0.08)] bg-[rgba(245,240,232,0.025)] px-3 py-3"
+                        key={athlete.name}
+                        className="flex items-center justify-between gap-3 border border-[rgba(245,240,232,0.08)] bg-[rgba(245,240,232,0.025)] px-3 py-3"
                       >
-                        <div
-                          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[10px] font-bold uppercase tracking-[1px] text-[#0a0a0a]"
-                          style={{ backgroundColor: selectedTeam.accent }}
-                        >
-                          {index + 1}
+                        <div className="flex items-center gap-3 min-w-0">
+                          <div
+                            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[10px] font-bold uppercase tracking-[1px] text-[#0a0a0a]"
+                            style={{ backgroundColor: selectedTeam.accent }}
+                          >
+                            {index + 1}
+                          </div>
+                          <div className="font-(--font-space-mono) text-[11px] uppercase tracking-[1.3px] text-[#f5f0e8]">
+                            {athlete.name}
+                          </div>
                         </div>
-                        <div className="font-(--font-space-mono) text-[11px] uppercase tracking-[1.3px] text-[#f5f0e8]">
-                          {athlete}
+
+                        <div
+                          className="shrink-0 font-(--font-anton) text-[22px] leading-none"
+                          style={{ color: selectedTeam.accent }}
+                        >
+                          +{athlete.score}
                         </div>
                       </div>
                     ))}

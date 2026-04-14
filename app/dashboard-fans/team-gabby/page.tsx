@@ -17,6 +17,7 @@ type Athlete = {
   event: string;
   height: string;
   weight: string;
+  score: number;
   bestStatLabel: string;
   bestStatValue: string;
   bestStatMeaning: string;
@@ -34,6 +35,7 @@ const athletes: Athlete[] = [
     event: "200m / 100m",
     height: `5'9"`,
     weight: "128 lbs",
+    score: 26,
     bestStatLabel: "Best Recent Time",
     bestStatValue: "21.78",
     bestStatMeaning: "A world-class 200m time that signals she can win against almost anyone in the field.",
@@ -49,6 +51,7 @@ const athletes: Athlete[] = [
     event: "100m / 200m",
     height: `5'11"`,
     weight: "154 lbs",
+    score: 25,
     bestStatLabel: "Best Recent Time",
     bestStatValue: "19.52",
     bestStatMeaning: "One of the fastest 200m performances in the world and a major indicator of title-winning form.",
@@ -64,6 +67,7 @@ const athletes: Athlete[] = [
     event: "100m / 200m",
     height: `5'1"`,
     weight: "119 lbs",
+    score: 21,
     bestStatLabel: "Best Recent Time",
     bestStatValue: "10.71",
     bestStatMeaning: "An elite 100m sprint that puts her among the fastest women in the world.",
@@ -79,6 +83,7 @@ const athletes: Athlete[] = [
     event: "1500m / Mile",
     height: `6'0"`,
     weight: "150 lbs",
+    score: 17,
     bestStatLabel: "Best Recent Time",
     bestStatValue: "3:29.38",
     bestStatMeaning: "An elite 1500m result showing he can contend for wins in top international fields.",
@@ -94,6 +99,7 @@ const athletes: Athlete[] = [
     event: "110m Hurdles",
     height: `6'2"`,
     weight: "190 lbs",
+    score: 16,
     bestStatLabel: "Best Recent Time",
     bestStatValue: "12.86",
     bestStatMeaning: "One of the best hurdle times in the world and a mark that usually wins or contends for the win.",
@@ -109,6 +115,7 @@ const athletes: Athlete[] = [
     event: "1500m / Mile",
     height: `6'0"`,
     weight: "145 lbs",
+    score: 13,
     bestStatLabel: "Best Recent Time",
     bestStatValue: "3:43.97",
     bestStatMeaning: "A top-level mile result that shows he belongs with the very best middle-distance runners.",
@@ -124,6 +131,7 @@ const athletes: Athlete[] = [
     event: "Shot Put",
     height: `6'7"`,
     weight: "320 lbs",
+    score: 11,
     bestStatLabel: "Best Recent Mark",
     bestStatValue: "22.91m",
     bestStatMeaning: "A huge throw that signals world-leading strength and championship-level consistency.",
@@ -139,6 +147,7 @@ const athletes: Athlete[] = [
     event: "Heptathlon",
     height: `6'0"`,
     weight: "160 lbs",
+    score: 10,
     bestStatLabel: "Best Recent Score",
     bestStatValue: "6423 pts",
     bestStatMeaning: "A very strong all-around score that reflects success across multiple events.",
@@ -154,6 +163,7 @@ const athletes: Athlete[] = [
     event: "1500m / Mile",
     height: `6'0"`,
     weight: "150 lbs",
+    score: 14,
     bestStatLabel: "Best Recent Time",
     bestStatValue: "3:31.12",
     bestStatMeaning: "A world-class middle-distance time that keeps him in the mix for major wins.",
@@ -169,6 +179,7 @@ const athletes: Athlete[] = [
     event: "Pole Vault",
     height: `6'1"`,
     weight: "154 lbs",
+    score: 12,
     bestStatLabel: "Best Recent Mark",
     bestStatValue: "4.80m",
     bestStatMeaning: "A championship-level vault that makes her a contender at every major competition.",
@@ -184,6 +195,7 @@ const athletes: Athlete[] = [
     event: "Shot Put",
     height: `6'0"`,
     weight: "295 lbs",
+    score: 7,
     bestStatLabel: "Best Recent Mark",
     bestStatValue: "22.68m",
     bestStatMeaning: "An elite-level shot put distance that can absolutely score big points.",
@@ -199,6 +211,7 @@ const athletes: Athlete[] = [
     event: "5000m / 10,000m",
     height: `5'11"`,
     weight: "132 lbs",
+    score: 8,
     bestStatLabel: "Best Recent Time",
     bestStatValue: "12:46.96",
     bestStatMeaning: "A top-end 5000m performance showing elite distance racing form.",
@@ -214,6 +227,7 @@ const athletes: Athlete[] = [
     event: "Long Jump",
     height: `5'4"`,
     weight: "128 lbs",
+    score: 9,
     bestStatLabel: "Best Recent Mark",
     bestStatValue: "7.07m",
     bestStatMeaning: "A top long jump mark that signals strong medal potential.",
@@ -229,6 +243,7 @@ const athletes: Athlete[] = [
     event: "100m",
     height: `5'3"`,
     weight: "121 lbs",
+    score: 9,
     bestStatLabel: "Best Recent Time",
     bestStatValue: "10.80",
     bestStatMeaning: "A very fast 100m that keeps her right in the mix for podium-level performances.",
@@ -244,6 +259,7 @@ const athletes: Athlete[] = [
     event: "Pole Vault",
     height: `5'11"`,
     weight: "181 lbs",
+    score: 15,
     bestStatLabel: "Best Recent Mark",
     bestStatValue: "6.05m",
     bestStatMeaning: "A massive vault that puts him clearly among the best in the sport.",
@@ -261,84 +277,41 @@ export default function TeamGabbyPage() {
       className={`${anton.variable} ${dmSans.variable} ${spaceMono.variable} min-h-screen bg-[#0a0a0a] text-[#f5f0e8] font-(--font-dm-sans)`}
     >
       <div className="relative isolate overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 opacity-70">
-          <svg viewBox="0 0 1600 1200" className="h-full w-full">
-            <defs>
-              <radialGradient id="teamGlowGabby" cx="74%" cy="18%" r="50%">
-                <stop offset="0%" stopColor="rgba(255,49,49,0.22)" />
-                <stop offset="45%" stopColor="rgba(59,127,255,0.10)" />
-                <stop offset="100%" stopColor="rgba(10,10,10,0)" />
-              </radialGradient>
-            </defs>
-            <rect width="1600" height="1200" fill="url(#teamGlowGabby)" />
-            <g fill="none" stroke="rgba(245,240,232,0.07)" strokeWidth="1.2">
-              <path d="M1310 -40 Q1040 300 1160 1240" />
-              <path d="M1400 -40 Q1130 300 1250 1240" />
-              <path d="M1220 -40 Q950 300 1070 1240" />
-            </g>
-          </svg>
-        </div>
-
-        <div className="pointer-events-none absolute -right-[10%] -top-[10%] h-[120%] w-[34%] -skew-x-[8deg] bg-[rgba(255,49,49,0.04)]" />
-
         <div className="relative mx-auto max-w-7xl px-6 py-8 md:px-10 lg:px-12">
           <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-            <Link
-              href="/dashboard-fans"
-              className="font-(--font-space-mono) text-[11px] uppercase tracking-[2px] text-[#FF3131] transition-colors hover:text-[#f5f0e8]"
-            >
-              Back to Fan Dashboard
-            </Link>
-
             <div className="rounded-full bg-[rgba(255,49,49,0.14)] px-4 py-2 font-(--font-space-mono) text-[10px] uppercase tracking-[2px] text-[#FF3131]">
               Team Gabby
             </div>
+            <Link href="/dashboard-fans" className="font-(--font-space-mono) text-[11px] uppercase tracking-[2px] text-[#FF3131] transition-colors hover:text-[#f5f0e8]">
+              Back to Fan Dashboard
+            </Link>
           </div>
 
           <section className="border border-[rgba(245,240,232,0.12)] bg-[rgba(245,240,232,0.04)] p-6 backdrop-blur-[10px] sm:p-8">
-            <div className="flex flex-col gap-8 xl:flex-row xl:items-end xl:justify-between">
-              <div>
-                <div className="mb-5 flex items-center gap-3 font-(--font-space-mono) text-[11px] uppercase tracking-[4px] text-[#FF3131]">
-                  <span className="block h-0.5 w-8 bg-[#FF3131]" />
-                  Fan Team View
-                </div>
-
-                <h1 className="font-(--font-anton) text-[clamp(40px,6vw,88px)] uppercase leading-[0.92] tracking-[-1px]">
-                  <span className="block">Team</span>
-                  <span className="block text-[#FF3131]">Gabby</span>
-                </h1>
-
-                <p className="mt-4 font-(--font-space-mono) text-[11px] uppercase tracking-[2px] text-[#b8b4ae]">
-                  Managed by Gabby Thomas
-                </p>
-
-                <p className="mt-5 max-w-170 text-[16px] font-light leading-7 text-[#c6c2bc]">
-                  A sprint-heavy roster with major star power, explosive speed, and several athletes who can win high-profile finals.
-                  This page makes it easier for casual fans to understand what each athlete does and why they matter.
-                </p>
-              </div>
-
-              <div className="grid gap-4 sm:grid-cols-3">
-                <InfoMetric label="Roster Size" value="15" accent="#FF3131" />
-                <InfoMetric label="Fans Following" value="4,360" accent="#9B5EFF" />
-                <InfoMetric label="Team Style" value="Speed" accent="#3B7FFF" />
-              </div>
+            <h1 className="font-(--font-anton) text-[clamp(40px,6vw,88px)] uppercase leading-[0.92] tracking-[-1px]">
+              <span className="block">Team</span>
+              <span className="block text-[#FF3131]">Gabby</span>
+            </h1>
+            <p className="mt-4 font-(--font-space-mono) text-[11px] uppercase tracking-[2px] text-[#b8b4ae]">
+              Managed by Gabby Thomas
+            </p>
+            <p className="mt-5 max-w-170 text-[16px] font-light leading-7 text-[#c6c2bc]">
+              A sprint-heavy roster with major star power, explosive speed, and several athletes who can win high-profile finals.
+            </p>
+            <div className="mt-5 inline-flex items-center gap-2 bg-[rgba(255,49,49,0.14)] px-3 py-2 font-(--font-space-mono) text-[10px] uppercase tracking-[2px] text-[#FF3131]">
+              Top 10 athletes count toward team score
             </div>
           </section>
 
           <section className="mt-8 grid gap-4">
             {athletes.map((athlete, index) => (
-              <article
-                key={athlete.name}
-                className="border border-[rgba(245,240,232,0.10)] bg-[rgba(245,240,232,0.03)] p-5 sm:p-6"
-              >
+              <article key={athlete.name} className="border border-[rgba(245,240,232,0.10)] bg-[rgba(245,240,232,0.03)] p-5 sm:p-6">
                 <div className="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
                   <div className="xl:max-w-110">
                     <div className="mb-3 flex flex-wrap items-center gap-3">
                       <div className="bg-[rgba(255,49,49,0.14)] px-3 py-2 font-(--font-space-mono) text-[10px] uppercase tracking-[2px] text-[#FF3131]">
                         Athlete {String(index + 1).padStart(2, "0")}
                       </div>
-
                       <div className="border border-[rgba(245,240,232,0.12)] px-3 py-2 font-(--font-space-mono) text-[10px] uppercase tracking-[2px] text-[#b8b4ae]">
                         {athlete.category}
                       </div>
@@ -351,6 +324,13 @@ export default function TeamGabbyPage() {
                     <p className="mt-3 font-(--font-space-mono) text-[11px] uppercase tracking-[2px] text-[#FF3131]">
                       {athlete.event}
                     </p>
+
+                    <div className="mt-4 inline-flex items-center gap-2 bg-[rgba(255,49,49,0.14)] px-3 py-2 font-(--font-space-mono) text-[10px] uppercase tracking-[2px] text-[#FF3131]">
+                      Season Score
+                      <span className="font-(--font-anton) text-[22px] leading-none text-[#f5f0e8]">
+                        +{athlete.score}
+                      </span>
+                    </div>
 
                     <div className="mt-4 flex flex-wrap gap-3">
                       <span className="border border-[rgba(245,240,232,0.12)] px-3 py-2 font-(--font-space-mono) text-[10px] uppercase tracking-[1.5px] text-[#b8b4ae]">
@@ -412,26 +392,5 @@ export default function TeamGabbyPage() {
         </div>
       </div>
     </main>
-  );
-}
-
-function InfoMetric({
-  label,
-  value,
-  accent,
-}: {
-  label: string;
-  value: string;
-  accent: string;
-}) {
-  return (
-    <div className="border border-[rgba(245,240,232,0.08)] bg-[rgba(245,240,232,0.03)] px-5 py-4">
-      <div className="font-(--font-space-mono) text-[10px] uppercase tracking-[2px] text-[#9c9892]">
-        {label}
-      </div>
-      <div className="mt-2 font-(--font-anton) text-[30px] leading-none" style={{ color: accent }}>
-        {value}
-      </div>
-    </div>
   );
 }

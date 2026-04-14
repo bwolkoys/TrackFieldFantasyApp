@@ -17,6 +17,7 @@ type Athlete = {
   event: string;
   height: string;
   weight: string;
+  score: number;
   bestStatLabel: string;
   bestStatValue: string;
   bestStatMeaning: string;
@@ -34,6 +35,7 @@ const athletes: Athlete[] = [
     event: "Pole Vault",
     height: `5'11"`,
     weight: "181 lbs",
+    score: 28,
     bestStatLabel: "Best Recent Mark",
     bestStatValue: "6.05m",
     bestStatMeaning: "An elite vault that puts him among the best pole vaulters in the world.",
@@ -49,6 +51,7 @@ const athletes: Athlete[] = [
     event: "1500m / Mile",
     height: `6'0"`,
     weight: "150 lbs",
+    score: 22,
     bestStatLabel: "Best Recent Time",
     bestStatValue: "3:31.12",
     bestStatMeaning: "A world-class 1500m time that shows he can compete with the best middle-distance runners.",
@@ -64,6 +67,7 @@ const athletes: Athlete[] = [
     event: "Pole Vault",
     height: `6'1"`,
     weight: "154 lbs",
+    score: 18,
     bestStatLabel: "Best Recent Mark",
     bestStatValue: "4.80m",
     bestStatMeaning: "A championship-level vault that consistently puts her in podium contention.",
@@ -79,6 +83,7 @@ const athletes: Athlete[] = [
     event: "400m Hurdles",
     height: `6'3"`,
     weight: "170 lbs",
+    score: 24,
     bestStatLabel: "Best Recent Time",
     bestStatValue: "46.82",
     bestStatMeaning: "A top-tier 400m hurdles time and the kind of performance that wins major global meets.",
@@ -94,6 +99,7 @@ const athletes: Athlete[] = [
     event: "Shot Put",
     height: `6'7"`,
     weight: "320 lbs",
+    score: 20,
     bestStatLabel: "Best Recent Mark",
     bestStatValue: "22.91m",
     bestStatMeaning: "An enormous throw that signals world-leading strength and consistency.",
@@ -109,6 +115,7 @@ const athletes: Athlete[] = [
     event: "5000m / 10,000m",
     height: `5'11"`,
     weight: "132 lbs",
+    score: 12,
     bestStatLabel: "Best Recent Time",
     bestStatValue: "12:46.96",
     bestStatMeaning: "A very fast 5000m result that shows top-end international fitness.",
@@ -124,6 +131,7 @@ const athletes: Athlete[] = [
     event: "Heptathlon",
     height: `6'0"`,
     weight: "160 lbs",
+    score: 15,
     bestStatLabel: "Best Recent Score",
     bestStatValue: "6423 pts",
     bestStatMeaning: "A high heptathlon score showing strength across multiple events, not just one.",
@@ -139,6 +147,7 @@ const athletes: Athlete[] = [
     event: "200m / 100m",
     height: `5'9"`,
     weight: "128 lbs",
+    score: 19,
     bestStatLabel: "Best Recent Time",
     bestStatValue: "21.78",
     bestStatMeaning: "An elite 200m time that puts her among the fastest women in the world.",
@@ -154,6 +163,7 @@ const athletes: Athlete[] = [
     event: "100m",
     height: `5'3"`,
     weight: "121 lbs",
+    score: 11,
     bestStatLabel: "Best Recent Time",
     bestStatValue: "10.80",
     bestStatMeaning: "An excellent 100m sprint time that makes her dangerous in any final.",
@@ -169,6 +179,7 @@ const athletes: Athlete[] = [
     event: "Pole Vault",
     height: `6'0"`,
     weight: "165 lbs",
+    score: 9,
     bestStatLabel: "Best Recent Mark",
     bestStatValue: "5.92m",
     bestStatMeaning: "A high-level vault that puts him in strong international form.",
@@ -184,6 +195,7 @@ const athletes: Athlete[] = [
     event: "Shot Put",
     height: `6'0"`,
     weight: "295 lbs",
+    score: 10,
     bestStatLabel: "Best Recent Mark",
     bestStatValue: "22.68m",
     bestStatMeaning: "A huge throw that keeps him in the conversation for wins at elite meets.",
@@ -199,6 +211,7 @@ const athletes: Athlete[] = [
     event: "Long Jump",
     height: `5'4"`,
     weight: "128 lbs",
+    score: 13,
     bestStatLabel: "Best Recent Mark",
     bestStatValue: "7.07m",
     bestStatMeaning: "A standout long jump performance that signals world-level medal potential.",
@@ -214,6 +227,7 @@ const athletes: Athlete[] = [
     event: "100m / 200m",
     height: `5'11"`,
     weight: "154 lbs",
+    score: 17,
     bestStatLabel: "Best Recent Time",
     bestStatValue: "19.52",
     bestStatMeaning: "One of the fastest 200m times in the world and the kind of mark fans should watch closely.",
@@ -229,6 +243,7 @@ const athletes: Athlete[] = [
     event: "400m Hurdles",
     height: `6'2"`,
     weight: "176 lbs",
+    score: 14,
     bestStatLabel: "Best Recent Time",
     bestStatValue: "46.70",
     bestStatMeaning: "An elite hurdles result that signals real winning potential every time he races.",
@@ -244,6 +259,7 @@ const athletes: Athlete[] = [
     event: "Discus",
     height: `6'0"`,
     weight: "170 lbs",
+    score: 8,
     bestStatLabel: "Best Recent Mark",
     bestStatValue: "69.80m",
     bestStatMeaning: "A very strong discus distance that makes her one of the most dangerous throwers in the field.",
@@ -271,75 +287,44 @@ export default function TeamMondoPage() {
               </radialGradient>
             </defs>
             <rect width="1600" height="1200" fill="url(#teamGlow)" />
-            <g fill="none" stroke="rgba(245,240,232,0.07)" strokeWidth="1.2">
-              <path d="M1310 -40 Q1040 300 1160 1240" />
-              <path d="M1400 -40 Q1130 300 1250 1240" />
-              <path d="M1220 -40 Q950 300 1070 1240" />
-            </g>
           </svg>
         </div>
 
-        <div className="pointer-events-none absolute -right-[10%] -top-[10%] h-[120%] w-[34%] -skew-x-[8deg] bg-[rgba(255,224,48,0.04)]" />
-
         <div className="relative mx-auto max-w-7xl px-6 py-8 md:px-10 lg:px-12">
           <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-            <Link
-              href="/dashboard-fans"
-              className="font-(--font-space-mono) text-[11px] uppercase tracking-[2px] text-[#9B5EFF] transition-colors hover:text-[#f5f0e8]"
-            >
-              Back to Fan Dashboard
-            </Link>
-
             <div className="rounded-full bg-[rgba(155,94,255,0.14)] px-4 py-2 font-(--font-space-mono) text-[10px] uppercase tracking-[2px] text-[#9B5EFF]">
               Team Mondo
             </div>
+            <Link href="/dashboard-fans" className="font-(--font-space-mono) text-[11px] uppercase tracking-[2px] text-[#9B5EFF] transition-colors hover:text-[#f5f0e8]">
+              Back to Fan Dashboard
+            </Link>
           </div>
 
           <section className="border border-[rgba(245,240,232,0.12)] bg-[rgba(245,240,232,0.04)] p-6 backdrop-blur-[10px] sm:p-8">
-            <div className="flex flex-col gap-8 xl:flex-row xl:items-end xl:justify-between">
-              <div>
-                <div className="mb-5 flex items-center gap-3 font-(--font-space-mono) text-[11px] uppercase tracking-[4px] text-[#9B5EFF]">
-                  <span className="block h-0.5 w-8 bg-[#9B5EFF]" />
-                  Fan Team View
-                </div>
-
-                <h1 className="font-(--font-anton) text-[clamp(40px,6vw,88px)] uppercase leading-[0.92] tracking-[-1px]">
-                  <span className="block">Team</span>
-                  <span className="block text-[#9B5EFF]">Mondo</span>
-                </h1>
-
-                <p className="mt-4 font-(--font-space-mono) text-[11px] uppercase tracking-[2px] text-[#b8b4ae]">
-                  Managed by Mondo Duplantis
-                </p>
-
-                <p className="mt-5 max-w-170 text-[16px] font-light leading-7 text-[#c6c2bc]">
-                  A high-upside team built around field-event dominance, versatile stars, and athletes who can score in
-                  major finals. This page is designed to help fans quickly understand who each athlete is, why they
-                  matter, and when they compete next.
-                </p>
-              </div>
-
-              <div className="grid gap-4 sm:grid-cols-3">
-                <InfoMetric label="Roster Size" value="15" accent="#9B5EFF" />
-                <InfoMetric label="Fans Following" value="4,821" accent="#FF3131" />
-                <InfoMetric label="Team Style" value="Power" accent="#3B7FFF" />
-              </div>
+            <h1 className="font-(--font-anton) text-[clamp(40px,6vw,88px)] uppercase leading-[0.92] tracking-[-1px]">
+              <span className="block">Team</span>
+              <span className="block text-[#9B5EFF]">Mondo</span>
+            </h1>
+            <p className="mt-4 font-(--font-space-mono) text-[11px] uppercase tracking-[2px] text-[#b8b4ae]">
+              Managed by Mondo Duplantis
+            </p>
+            <p className="mt-5 max-w-170 text-[16px] font-light leading-7 text-[#c6c2bc]">
+              A high-upside team built around field-event dominance, versatile stars, and athletes who can score in major finals.
+            </p>
+            <div className="mt-5 inline-flex items-center gap-2 bg-[rgba(155,94,255,0.14)] px-3 py-2 font-(--font-space-mono) text-[10px] uppercase tracking-[2px] text-[#9B5EFF]">
+              Top 10 athletes count toward team score
             </div>
           </section>
 
           <section className="mt-8 grid gap-4">
             {athletes.map((athlete, index) => (
-              <article
-                key={athlete.name}
-                className="border border-[rgba(245,240,232,0.10)] bg-[rgba(245,240,232,0.03)] p-5 sm:p-6"
-              >
+              <article key={athlete.name} className="border border-[rgba(245,240,232,0.10)] bg-[rgba(245,240,232,0.03)] p-5 sm:p-6">
                 <div className="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
                   <div className="xl:max-w-110">
                     <div className="mb-3 flex flex-wrap items-center gap-3">
                       <div className="bg-[rgba(155,94,255,0.14)] px-3 py-2 font-(--font-space-mono) text-[10px] uppercase tracking-[2px] text-[#9B5EFF]">
                         Athlete {String(index + 1).padStart(2, "0")}
                       </div>
-
                       <div className="border border-[rgba(245,240,232,0.12)] px-3 py-2 font-(--font-space-mono) text-[10px] uppercase tracking-[2px] text-[#b8b4ae]">
                         {athlete.category}
                       </div>
@@ -352,6 +337,13 @@ export default function TeamMondoPage() {
                     <p className="mt-3 font-(--font-space-mono) text-[11px] uppercase tracking-[2px] text-[#9B5EFF]">
                       {athlete.event}
                     </p>
+
+                    <div className="mt-4 inline-flex items-center gap-2 bg-[rgba(155,94,255,0.14)] px-3 py-2 font-(--font-space-mono) text-[10px] uppercase tracking-[2px] text-[#9B5EFF]">
+                      Season Score
+                      <span className="font-(--font-anton) text-[22px] leading-none text-[#f5f0e8]">
+                        +{athlete.score}
+                      </span>
+                    </div>
 
                     <div className="mt-4 flex flex-wrap gap-3">
                       <span className="border border-[rgba(245,240,232,0.12)] px-3 py-2 font-(--font-space-mono) text-[10px] uppercase tracking-[1.5px] text-[#b8b4ae]">
@@ -413,26 +405,5 @@ export default function TeamMondoPage() {
         </div>
       </div>
     </main>
-  );
-}
-
-function InfoMetric({
-  label,
-  value,
-  accent,
-}: {
-  label: string;
-  value: string;
-  accent: string;
-}) {
-  return (
-    <div className="border border-[rgba(245,240,232,0.08)] bg-[rgba(245,240,232,0.03)] px-5 py-4">
-      <div className="font-(--font-space-mono) text-[10px] uppercase tracking-[2px] text-[#9c9892]">
-        {label}
-      </div>
-      <div className="mt-2 font-(--font-anton) text-[30px] leading-none" style={{ color: accent }}>
-        {value}
-      </div>
-    </div>
   );
 }

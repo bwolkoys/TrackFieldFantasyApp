@@ -1,8 +1,6 @@
-
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { Anton, DM_Sans, Space_Mono } from "next/font/google";
 
 const anton = Anton({
@@ -19,455 +17,642 @@ const spaceMono = Space_Mono({
 
 type Manager = {
   name: string;
-  event: string;
-  initials: string;
-  avatarClass: string;
+  shortName: string;
+  accent: string;
+  teamName: string;
+  score: number;
+  fans: string;
+  identity: string;
+  quote: string;
+  href: string;
 };
 
-type Team = {
-  name: string;
-  manager: string;
-  athletes: string[];
+type Standing = {
+  rank: number;
+  team: string;
+  score: number;
+  summary: string;
   accent: string;
+};
+
+type Highlight = {
+  athlete: string;
+  summary: string;
+  image: string;
 };
 
 const managers: Manager[] = [
   {
     name: "Mondo Duplantis",
-    event: "Pole Vault",
-    initials: "MD",
-    avatarClass: "bg-[#9B5EFF] text-[#0a0a0a]",
+    shortName: "MD",
+    accent: "#9B5EFF",
+    image: "",
+    teamName: "Team Mondo",
+    score: 124,
+    fans: "4,821",
+    identity: "Built for power events and clutch performances",
+    quote:
+      "Big moments matter. I built this team to score when the pressure is highest.",
+    href: "/dashboard-fans/team-mondo",
   },
   {
     name: "Gabby Thomas",
-    event: "200m / 4x100",
-    initials: "GT",
-    avatarClass: "bg-[#FF3131] text-[#f5f0e8]",
+    shortName: "GT",
+    accent: "#FF3131",
+    teamName: "Team Gabby",
+    score: 118,
+    fans: "4,360",
+    identity: "Speed-first roster with major upside",
+    quote: "I wanted a team that could light up the track from the gun.",
+    href: "/dashboard-fans/team-gabby",
   },
   {
     name: "Noah Lyles",
-    event: "100m / 200m",
-    initials: "NL",
-    avatarClass: "bg-[#1248E0] text-[#f5f0e8]",
+    shortName: "NL",
+    accent: "#3B7FFF",
+    teamName: "Team Noah",
+    score: 110,
+    fans: "3,988",
+    identity: "Star power, speed, and big-race energy",
+    quote: "This team is built to make noise every time they line up.",
+    href: "/dashboard-fans/team-noah",
   },
   {
-    name: "Grant Fisher",
-    event: "Distance",
-    initials: "GF",
-    avatarClass: "bg-[#00D26A] text-[#0a0a0a]",
-  },
-  {
-    name: "Anna Hall",
-    event: "Heptathlon",
-    initials: "AH",
-    avatarClass: "bg-[#FF6B1A] text-[#0a0a0a]",
+    name: "Rai Benjamin",
+    shortName: "RB",
+    accent: "#00D26A",
+    teamName: "Team Rai",
+    score: 102,
+    fans: "3,524",
+    identity: "Depth, balance, and championship mentality",
+    quote: "I drafted a team that can win points in every kind of meet.",
+    href: "/dashboard-fans/team-rai",
   },
 ];
 
-const teams: Team[] = [
+const standings: Standing[] = [
   {
-    name: "Team Mondo",
-    manager: "Mondo Duplantis",
-    athletes: ["Cole Hocker", "Katie Moon", "Rai Benjamin"],
-    accent: "border-t-[#9B5EFF] hover:border-[#9B5EFF]",
+    rank: 1,
+    team: "Team Mondo",
+    score: 124,
+    summary: "Power events, vault dominance, and major finals upside.",
+    accent: "#9B5EFF",
   },
   {
-    name: "Team Gabby",
-    manager: "Gabby Thomas",
-    athletes: ["Melissa Jefferson-Wooden", "Anna Hall", "Joe Kovacs"],
-    accent: "border-t-[#FF3131] hover:border-[#FF3131]",
+    rank: 2,
+    team: "Team Gabby",
+    score: 118,
+    summary: "Explosive sprint points and elite short-race firepower.",
+    accent: "#FF3131",
   },
   {
-    name: "Team Noah",
-    manager: "Noah Lyles",
-    athletes: ["Grant Fisher", "Tara Davis-Woodhall", "Emmanouil Karalis"],
-    accent: "border-t-[#3B7FFF] hover:border-[#3B7FFF]",
+    rank: 3,
+    team: "Team Noah",
+    score: 110,
+    summary: "Big names, big personalities, and high-ceiling scorers.",
+    accent: "#3B7FFF",
   },
   {
-    name: "Team Rai",
-    manager: "Rai Benjamin",
-    athletes: ["Ryan Crouser", "Karsten Warholm", "Gabby Thomas"],
-    accent: "border-t-[#00D26A] hover:border-[#00D26A]",
+    rank: 4,
+    team: "Team Rai",
+    score: 102,
+    summary: "Balanced roster depth with championship-level consistency.",
+    accent: "#00D26A",
   },
 ];
 
-export default function FielddayPage() {
-  const [mouse, setMouse] = useState({ x: 0, y: 0 });
-  const [ring, setRing] = useState({ x: 0, y: 0 });
+const highlights: Highlight[] = [
+  {
+    athlete: "Noah Lyles",
+    summary: "Sprint superstar. Watch the finishes that change the standings.",
+    image: "#3B7FFF",
+  },
+  {
+    athlete: "Gabby Thomas",
+    summary: "Smooth speed, huge races, and high-value points.",
+    image: "#FF3131",
+  },
+  {
+    athlete: "Rai Benjamin",
+    summary: "One of the most dangerous closers in the sport.",
+    image: "#00D26A",
+  },
+  {
+    athlete: "Mondo Duplantis",
+    summary: "Big-air moments that can swing an entire week.",
+    image: "#9B5EFF",
+  },
+];
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMouse({ x: e.clientX, y: e.clientY });
-      requestAnimationFrame(() => {
-        setRing({ x: e.clientX - 12, y: e.clientY - 12 });
-      });
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
-
+export default function HomePage() {
   return (
-    <div
-      className={`${anton.variable} ${dmSans.variable} ${spaceMono.variable} bg-[#0a0a0a] text-[#f5f0e8] overflow-x-hidden scroll-smooth cursor-none font-(--font-dm-sans)`}
+    <main
+      className={`${anton.variable} ${dmSans.variable} ${spaceMono.variable} min-h-screen overflow-x-hidden bg-[#0a0a0a] text-[#f5f0e8] font-(--font-dm-sans)`}
     >
-      <div
-        className="pointer-events-none fixed z-9999 h-3 w-3 rounded-full bg-[#9B5EFF] mix-blend-difference transition-transform duration-150 ease-out"
-        style={{ left: mouse.x - 6, top: mouse.y - 6 }}
-      />
-      <div
-        className="pointer-events-none fixed z-9998 h-9 w-9 rounded-full border border-[#9B5EFF] mix-blend-difference transition-all duration-300"
-        style={{ left: ring.x, top: ring.y }}
-      />
-
-      <nav className="fixed left-0 right-0 top-0 z-100 flex items-center justify-between px-12 py-5 mix-blend-normal">
-        <a
-          href="#"
-          className="font-(--font-anton) text-[22px] tracking-[4px] text-[#9B5EFF] no-underline"
-        >
-          FIELDDAY
-        </a>
-
-        <ul className="hidden list-none items-center gap-9 md:flex">
-          {[
-            ["How It Works", "#how-it-works"],
-            ["Managers", "#managers"],
-            ["Teams", "#teams"],
-          ].map(([label, href]) => (
-            <li key={label}>
-              <a
-                href={href}
-                className="font-(--font-space-mono) text-[11px] uppercase tracking-[2px] text-[#bab7b1] no-underline transition-colors duration-200 hover:text-[#9B5EFF]"
-              >
-                {label}
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        <Link href="/signup">
-          <button className="bg-[#9B5EFF] px-5.5 py-2.5 font-bold text-[11px] uppercase tracking-[2px] text-[#0a0a0a] transition duration-200 hover:scale-[1.03] hover:bg-[#f5f0e8]">
-            Sign Up
-          </button>
-        </Link>
-      </nav>
-
-      <section className="relative grid min-h-screen overflow-hidden lg:grid-cols-2">
-        <div className="relative z-2 flex flex-col justify-center px-12 pb-20 pt-35">
-          <div className="mb-7 flex items-center gap-3 font-(--font-space-mono) text-[11px] uppercase tracking-[4px] text-[#9B5EFF]">
-            <span className="block h-0.5 w-8 bg-[#9B5EFF]" />
-            Fantasy Track &amp; Field
-          </div>
-
-          <h1 className="mb-9 font-(--font-anton) text-[clamp(72px,8vw,120px)] uppercase leading-[0.92] tracking-[-1px]">
-            <span className="block">Own The</span>
-            <span className="block text-[#9B5EFF]">Season</span>
-            <span className="block text-transparent [WebkitTextStroke:2px_#f5f0e8]">
-              Live
-            </span>
-          </h1>
-
-          <p className="mb-12 max-w-100 text-[17px] font-light leading-[1.65] text-[#c6c2bc]">
-            Build your squad, follow elite athlete managers, and score points in
-            real time during the Diamond League season.
-          </p>
-
-          <div className="flex flex-wrap items-center gap-5">
-            <button className="btn-primary relative overflow-hidden px-10 py-4.5 font-(--font-anton) text-base uppercase tracking-[3px] text-[#0a0a0a] transition-transform duration-200 hover:-translate-y-0.5">
-              Pick Your Team
-            </button>
-            <button className="border border-[rgba(245,240,232,0.3)] bg-transparent px-8 py-4.5 font-(--font-space-mono) text-xs uppercase tracking-[2px] text-[#f5f0e8] transition-colors duration-200 hover:border-[#f5f0e8] hover:text-[#9B5EFF]">
-              See How It Works
-            </button>
-          </div>
-
-          <div className="mt-16 flex gap-10 border-t border-[rgba(245,240,232,0.1)] pt-10">
-            {[
-              ["4", "Athlete Managers"],
-              ["15", "Athletes Per Team"],
-              ["06.01", "Soft Launch"],
-            ].map(([num, label]) => (
-              <div key={label}>
-                <div className="font-(--font-anton) text-4xl leading-none text-[#9B5EFF]">
-                  {num}
-                </div>
-                <div className="mt-1 font-(--font-space-mono) text-[10px] uppercase tracking-[2px] text-[#a3a09a]">
-                  {label}
-                </div>
-              </div>
-            ))}
-          </div>
+      <div className="relative isolate overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 opacity-70">
+          <svg viewBox="0 0 1600 1600" className="h-full w-full">
+            <defs>
+              <radialGradient id="homepageGlow" cx="72%" cy="16%" r="46%">
+                <stop offset="0%" stopColor="rgba(155,94,255,0.22)" />
+                <stop offset="45%" stopColor="rgba(59,127,255,0.12)" />
+                <stop offset="100%" stopColor="rgba(10,10,10,0)" />
+              </radialGradient>
+            </defs>
+            <rect width="1600" height="1600" fill="url(#homepageGlow)" />
+            <g fill="none" stroke="rgba(245,240,232,0.06)" strokeWidth="1.2">
+              <path d="M1320 -40 Q1080 340 1200 1640" />
+              <path d="M1410 -40 Q1170 340 1290 1640" />
+              <path d="M1230 -40 Q990 340 1110 1640" />
+            </g>
+          </svg>
         </div>
 
-        <div className="relative overflow-hidden">
-          <div className="absolute inset-0 pointer-events-none">
-            <svg viewBox="0 0 800 1000" className="h-full w-full">
-              <defs>
-                <radialGradient id="heroGlow" cx="70%" cy="30%" r="55%">
-                  <stop offset="0%" stopColor="rgba(155,94,255,0.18)" />
-                  <stop offset="100%" stopColor="rgba(10,10,10,0)" />
-                </radialGradient>
-              </defs>
-              <rect width="800" height="1000" fill="url(#heroGlow)" />
-              <g opacity="0.1" stroke="#f5f0e8" fill="none">
-                <path d="M700 0 Q540 220 610 1000" strokeWidth="1" />
-                <path d="M760 0 Q600 240 670 1000" strokeWidth="1" />
-                <path d="M640 0 Q480 210 550 1000" strokeWidth="1" />
-              </g>
-            </svg>
-          </div>
+        <div className="pointer-events-none absolute -right-[8%] -top-[8%] h-[120%] w-[34%] -skew-x-[8deg] bg-[rgba(255,224,48,0.04)]" />
 
-          <div className="pointer-events-none absolute -right-[5%] -top-[10%] h-[120%] w-[55%] -skew-x-6 bg-[rgba(255,224,48,0.03)]" />
-          <div className="absolute bottom-0 left-0 right-0 h-[35%] bg-linear-to-t from-[rgba(255,224,48,0.04)] to-transparent" />
+        <div className="relative mx-auto max-w-7xl px-6 py-8 md:px-10 lg:px-12">
+          <nav className="flex flex-wrap items-center justify-between gap-4">
+            <Link
+              href="/"
+              className="font-(--font-anton) text-[22px] tracking-[4px] text-[#9B5EFF] no-underline"
+            >
+              FIELDDAY
+            </Link>
 
-          <div className="absolute bottom-10 left-5 right-5 h-45">
-            <svg viewBox="0 0 900 180" className="h-full w-full">
-              <g fill="none" stroke="rgba(245,240,232,0.22)" strokeWidth="2">
-                <path d="M-40 160 C 180 40, 520 40, 940 160" />
-                <path d="M-40 135 C 180 15, 520 15, 940 135" />
-                <path d="M-40 110 C 180 -10, 520 -10, 940 110" />
-                <path d="M-40 85 C 180 -35, 520 -35, 940 85" />
-              </g>
-            </svg>
-          </div>
+            <div className="hidden sm:flex flex-wrap gap-3">
+              <Link
+                href="/signup"
+                className="bg-[#9B5EFF] px-5 py-3.5 text-[11px] font-bold uppercase tracking-[2px] text-[#0a0a0a] transition duration-200 hover:scale-[1.03] hover:bg-[#f5f0e8]"
+              >
+                Choose Your Team
+              </Link>
+            </div>
+          </nav>
 
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="relative h-100 w-75">
-              {[
-                {
-                  name: "Gabby Thomas",
-                  event: "Sprints",
-                  points: "128",
-                  top: "top-0 left-0",
-                  border: "border-t-[3px] border-t-[#9B5EFF]",
-                  delay: "0s",
-                },
-                {
-                  name: "Mondo Duplantis",
-                  event: "Pole Vault",
-                  points: "114",
-                  top: "top-20 left-[60px]",
-                  border: "border-t-[3px] border-t-[#FF3131]",
-                  delay: "1s",
-                },
-                {
-                  name: "Grant Fisher",
-                  event: "Distance",
-                  points: "106",
-                  top: "top-40 left-5",
-                  border: "border-t-[3px] border-t-[#3B7FFF]",
-                  delay: "2s",
-                },
-              ].map((card) => (
-                <div
-                  key={card.name}
-                  className={`athlete-card-hero absolute w-55 border border-[rgba(245,240,232,0.12)] bg-[rgba(245,240,232,0.04)] p-6 backdrop-blur-[10px] ${card.top} ${card.border}`}
-                  style={{ animationDelay: card.delay }}
+          <section className="grid min-h-[88vh] items-center gap-10 pt-14 lg:grid-cols-[1.05fr_0.95fr] lg:pt-8">
+            <div>
+              <div className="mb-6 flex items-center gap-3 font-(--font-space-mono) text-[11px] uppercase tracking-[4px] text-[#9B5EFF]">
+                <span className="block h-0.5 w-8 bg-[#9B5EFF]" />
+                Fantasy Track &amp; Field
+              </div>
+
+              <h1 className="font-(--font-anton) text-[clamp(56px,8vw,118px)] uppercase leading-[0.9] tracking-[-1px]">
+                <span className="block">Pick Your Squad.</span>
+                <span className="block text-[#9B5EFF]"> Own The Track.</span>
+              </h1>
+
+              <p className="mt-7 max-w-170 text-[17px] font-light leading-8 text-[#c6c2bc]">
+                Follow athlete-managed teams, track real-world performances, and
+                back your squad all season long. Every sprint, jump, throw, and
+                finish can change the standings.
+              </p>
+
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link
+                  href="/signup"
+                  className="bg-[#9B5EFF] px-6 py-4 text-[11px] font-bold uppercase tracking-[2px] text-[#0a0a0a] transition duration-200 hover:scale-[1.03] hover:bg-[#f5f0e8]"
                 >
-                  <div className="mb-1 font-(--font-anton) text-lg tracking-[1px]">
-                    {card.name}
-                  </div>
-                  <div className="mb-4 font-(--font-space-mono) text-[10px] uppercase tracking-[2px] text-[#9B5EFF]">
-                    {card.event}
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div className="font-(--font-anton) text-[32px] text-[#9B5EFF]">
-                      {card.points}
+                  Choose Your Team
+                </Link>
+                <a
+                  href="#managers"
+                  className="border border-[rgba(245,240,232,0.16)] px-6 py-4 font-(--font-space-mono) text-[11px] uppercase tracking-[2px] text-[#f5f0e8] transition-colors hover:border-[#f5f0e8] hover:text-[#9B5EFF]"
+                >
+                  Meet the Managers
+                </a>
+              </div>
+
+              <div className="mt-12 flex flex-wrap gap-10 border-t border-[rgba(245,240,232,0.1)] pt-8">
+                <HeroMetric
+                  value="4"
+                  label="Athlete Managers"
+                  accent="#9B5EFF"
+                />
+                <HeroMetric
+                  value="60"
+                  label="Athletes Drafted"
+                  accent="#FF3131"
+                />
+                <HeroMetric
+                  value="06.01"
+                  label="Soft Launch"
+                  accent="#3B7FFF"
+                />
+              </div>
+            </div>
+
+            <div className="grid gap-4">
+              <FeatureCard
+                accent="#9B5EFF"
+                label="Current Leader"
+                title="Team Mondo — 124 pts"
+                description="Built for power events, vault dominance, and major final moments."
+              />
+              <FeatureCard
+                accent="#FF3131"
+                label="Manager Quote"
+                title="“I wanted a team that could light up the track from the start.”"
+                description="Gabby Thomas on building a speed-first roster with major upside."
+              />
+              {/* <FeatureCard
+                accent="#3B7FFF"
+                label="Next Meet"
+                title="Rome Diamond League — June 4"
+                description="The first major competition activation where managers’ athletes start scoring live."
+              /> */}
+            </div>
+          </section>
+
+          <section className="py-16" id="how-it-works">
+            <SectionIntro
+              label="How It Works"
+              title="Pick. Follow. Score."
+              description="Built for both die-hard track fans and people discovering the sport for the first time."
+            />
+
+            <div className="mt-12 grid gap-0.5 lg:grid-cols-3">
+              <HowItWorksCard
+                number="01"
+                accent="#9B5EFF"
+                title="Choose A Manager"
+                description="Back one of four athlete-led teams for the season."
+              />
+              <HowItWorksCard
+                number="02"
+                accent="#FF3131"
+                title="Track Every Meet"
+                description="Real performances across Diamond League events drive fantasy points."
+              />
+              <HowItWorksCard
+                number="03"
+                accent="#3B7FFF"
+                title="Win With Your Squad"
+                description="Follow standings, watch your athletes score, and stay in the race all season."
+              />
+            </div>
+          </section>
+
+          <section className="py-16 scroll-mt-24" id="managers">
+            <SectionIntro
+              label="Choose Your Manager"
+              title="Four Captains. Four Team Identities. One League."
+              description="Each fan follows one athlete manager for the season. Compare the teams, check their current score, and choose who you want to ride with."
+            />
+            <div className="mt-12 grid gap-5 lg:grid-cols-2 xl:grid-cols-4">
+              {highlights.map((highlight) => (
+                <div
+                  key={highlight.athlete}
+                  className="group block border border-[rgba(245,240,232,0.10)] bg-[rgba(245,240,232,0.03)] p-5 transition-colors hover:bg-[rgba(245,240,232,0.05)]"
+                >
+                  <div
+                    className="mb-5 h-44 w-full bg-[rgba(245,240,232,0.03)]"
+                    style={{
+                      boxShadow: `inset 0 0 0 1px rgba(245,240,232,0.08), inset 0 0 120px ${highlight.image}22`,
+                    }}
+                  />
+                  <h3 className="font-(--font-anton) text-[28px] uppercase leading-none tracking-[0.4px]">
+                    {highlight.athlete}
+                  </h3>
+                  <p className="mt-4 text-[15px] font-light leading-7 text-[#c6c2bc]">
+                    {highlight.summary}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          <section className="py-16">
+            <SectionIntro
+              label="Fan Rewards"
+              title="Follow Your Team. Unlock The Experience."
+              description="Following a team is more than just points. Fans will have access to giveaways, special experiences, and future rewards tied to the season."
+            />
+
+            <div className="mt-12 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              <RewardCard title="Event Tickets" />
+              <RewardCard title="League Experiences" />
+              <RewardCard title="Gala Invitations" />
+              <RewardCard title="Special Fan Rewards" />
+            </div>
+
+            <p className="mt-6 max-w-170 text-[16px] font-light leading-7 text-[#c6c2bc]">
+              More than a fantasy game — this is your inside track to the sport.
+            </p>
+          </section>
+
+          <section className="py-16" id="standings">
+            <SectionIntro
+              label="League Standings"
+              title="Where The Season Stands Right Now"
+              description="The top 10 athletes on each team count toward the total score, so every result matters."
+            />
+
+            <div className="mt-12 grid gap-4">
+              {standings.map((standing) => (
+                <div
+                  key={standing.team}
+                  className="group block border hover:bg-[rgba(245,240,232,0.05)] border-[rgba(245,240,232,0.10)] bg-[rgba(245,240,232,0.03)] p-5"
+                >
+                  <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                    <div className="flex items-center gap-4">
+                      <div
+                        className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full font-(--font-anton) text-[24px] text-[#0a0a0a]"
+                        style={{ backgroundColor: standing.accent }}
+                      >
+                        {standing.rank}
+                      </div>
+
+                      <div>
+                        <h3 className="font-(--font-anton) text-[30px] uppercase leading-none tracking-[0.4px]">
+                          {standing.team}
+                        </h3>
+                        <p className="mt-2 text-[15px] font-light leading-7 text-[#c6c2bc]">
+                          {standing.summary}
+                        </p>
+                      </div>
                     </div>
-                    <div className="font-(--font-space-mono) text-[10px] uppercase tracking-[1px] text-[#a3a09a]">
-                      Total Pts
+
+                    <div className="flex items-center gap-4">
+                      <div className="text-right">
+                        <div className="font-(--font-space-mono) text-[10px] uppercase tracking-[2px] text-[#8f8b85]">
+                          Team Score
+                        </div>
+                        <div
+                          className="mt-2 font-(--font-anton) text-[34px] leading-none"
+                          style={{ color: standing.accent }}
+                        >
+                          {standing.score}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
 
-      <section id="how-it-works" className="relative px-12 py-30">
-        <div className="mb-5 flex items-center gap-3 font-(--font-space-mono) text-[11px] uppercase tracking-[4px] text-[#9B5EFF]">
-          <span className="block h-0.5 w-6 bg-[#9B5EFF]" />
-          How It Works
-        </div>
-        <h2 className="mb-16 font-(--font-anton) text-[clamp(40px,5vw,72px)] uppercase leading-[0.95]">
-          Pick. Follow. <br /> Score.
-        </h2>
+          <section className="py-16">
+            <SectionIntro
+              label="Why It Hits Different"
+              title="Track And Field, Rebuilt As A Fantasy Sport"
+              description=""
+            />
 
-        <div className="grid gap-0.5 lg:grid-cols-3">
-          {[
-            {
-              num: "01",
-              iconClass: "bg-[#9B5EFF]",
-              icon: "⚑",
-              title: "Choose A Manager",
-              desc: "Fans sign up, explore athlete managers, and pick the team they want to ride with for the season.",
-            },
-            {
-              num: "02",
-              iconClass: "bg-[#FF3131]",
-              icon: "↗",
-              title: "Track Live Results",
-              desc: "Scores update around real competition data, giving fans an easy way to follow every major moment.",
-            },
-            {
-              num: "03",
-              iconClass: "bg-[#1248E0]",
-              icon: "★",
-              title: "Win Experiences",
-              desc: "Top-performing teams unlock prizes, event tickets, fan experiences, and special access throughout the year.",
-            },
-          ].map((step) => (
-            <div
-              key={step.num}
-              className="group relative overflow-hidden border border-[rgba(245,240,232,0.08)] bg-[rgba(245,240,232,0.03)] px-9 py-12 transition-colors duration-300 hover:bg-[rgba(245,240,232,0.06)]"
-              data-num={step.num}
-            >
-              <div className="pointer-events-none absolute -right-5 -top-5 font-(--font-anton) text-[120px] leading-none opacity-[0.04]">
-                {step.num}
-              </div>
-              <div
-                className={`mb-7 flex h-12 w-12 items-center justify-center text-2xl text-[#0a0a0a] ${step.iconClass}`}
-              >
-                {step.icon}
-              </div>
-              <h3 className="mb-4 font-(--font-anton) text-2xl uppercase tracking-[1px]">
-                {step.title}
-              </h3>
-              <p className="text-[15px] font-light leading-[1.7] text-[#afaba5]">
-                {step.desc}
-              </p>
+            <div className="mt-12 grid gap-4 lg:grid-cols-2">
+              <StatementCard
+                accent="#9B5EFF"
+                title="Turn Diamond League drama into fantasy glory"
+                body="Watch the world’s best chase points for themselves and for your squad all year long."
+              />
+              <StatementCard
+                accent="#FF3131"
+                title="From blocks to finish line, every race matters"
+                body="Every event can swing the standings and reshape the season."
+              />
+              <StatementCard
+                accent="#3B7FFF"
+                title="Relays, records, and rivalry"
+                body="Experience track and field like a team sport, with strategy, momentum, and manager-led competition."
+              />
+              <StatementCard
+                accent="#00D26A"
+                title="No offseason, just speed"
+                body="Stay connected to the athletes, the points, and the storylines meet after meet."
+              />
             </div>
-          ))}
-        </div>
-      </section>
+          </section>
 
-      <section
-        id="managers"
-        className="overflow-hidden bg-[#f5f0e8] py-30 text-[#0a0a0a]"
-      >
-        <div className="px-12">
-          <div className="mb-5 flex items-center gap-3 font-(--font-space-mono) text-[11px] uppercase tracking-[4px] text-[#FF3131]">
-            <span className="block h-0.5 w-6 bg-[#FF3131]" />
-            Athlete Managers
-          </div>
-          <h2 className="font-(--font-anton) text-[clamp(40px,5vw,72px)] uppercase leading-[0.95]">
-            The People <br /> Picking The Teams
-          </h2>
-        </div>
 
-        <div className="mt-14 overflow-hidden border-y-2 border-[#0a0a0a] py-8">
-          <div className="managers-marquee flex w-max gap-0">
-            {[...managers, ...managers].map((manager, idx) => (
-              <div
-                key={`${manager.name}-${idx}`}
-                className="inline-flex whitespace-nowrap border-r-2 border-[#0a0a0a] px-8 py-2 pl-2"
-              >
-                <div className="flex items-center gap-4">
-                  <div
-                    className={`flex h-13 w-13 shrink-0 items-center justify-center rounded-full font-(--font-anton) text-lg ${manager.avatarClass}`}
+          <section className="py-20">
+            <div className="border border-[rgba(245,240,232,0.10)] bg-[rgba(245,240,232,0.03)] p-8 sm:p-10">
+              <div className="max-w-4xl">
+                <div className="mb-5 font-(--font-space-mono) text-[11px] uppercase tracking-[4px] text-[#9B5EFF]">
+                  Final Call
+                </div>
+                <h2 className="font-(--font-anton) text-[clamp(38px,5vw,74px)] uppercase leading-[0.95] tracking-[-1px]">
+                  Pick Your Team Before The Next Meet.
+                </h2>
+                <p className="mt-6 max-w-170 text-[17px] font-light leading-8 text-[#c6c2bc]">
+                  Join the league, follow your manager, and track every point
+                  from opening race to final standings.
+                </p>
+
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <Link
+                    href="/signup"
+                    className="bg-[#9B5EFF] px-6 py-4 text-[11px] font-bold uppercase tracking-[2px] text-[#0a0a0a] transition duration-200 hover:scale-[1.03] hover:bg-[#f5f0e8]"
                   >
-                    {manager.initials}
-                  </div>
-                  <div>
-                    <div className="font-(--font-anton) text-xl tracking-[0.5px]">
-                      {manager.name}
-                    </div>
-                    <div className="font-(--font-space-mono) text-[10px] uppercase tracking-[1px] text-[#97948f]">
-                      {manager.event}
-                    </div>
-                  </div>
+                    Choose Your Team
+                  </Link>
+                  <a
+                    href="#standings"
+                    className="border border-[rgba(245,240,232,0.16)] px-6 py-4 font-(--font-space-mono) text-[11px] uppercase tracking-[2px] text-[#f5f0e8] transition-colors hover:border-[#f5f0e8] hover:text-[#9B5EFF]"
+                  >
+                    View League Standings
+                  </a>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="teams" className="relative overflow-hidden px-12 py-30">
-        <div className="mb-5 flex items-center gap-3 font-(--font-space-mono) text-[11px] uppercase tracking-[4px] text-[#9B5EFF]">
-          <span className="block h-0.5 w-6 bg-[#9B5EFF]" />
-          Teams
-        </div>
-        <h2 className="font-(--font-anton) text-[clamp(40px,5vw,72px)] uppercase leading-[0.95]">
-          Follow Your <br /> Favorite Squad
-        </h2>
-
-        <div className="mt-16 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {teams.map((team) => (
-            <div
-              key={team.name}
-              className={`group relative overflow-hidden border border-[rgba(245,240,232,0.1)] bg-[rgba(245,240,232,0.03)] px-6 py-8 transition duration-300 hover:-translate-y-1.5 ${team.accent}`}
-            >
-              <div className="mb-3 font-(--font-space-mono) text-[10px] uppercase tracking-[2px] text-[#9B5EFF]">
-                Managed By {team.manager}
-              </div>
-              <h3 className="mb-5 font-(--font-anton) text-[30px] uppercase leading-none tracking-[0.5px]">
-                {team.name}
-              </h3>
-              <div className="space-y-3">
-                {team.athletes.map((athlete) => (
-                  <div
-                    key={athlete}
-                    className="border-b border-[rgba(245,240,232,0.08)] pb-3 font-(--font-space-mono) text-xs uppercase tracking-[1.5px] text-[#c6c2bc]"
-                  >
-                    {athlete}
-                  </div>
-                ))}
-              </div>
             </div>
-          ))}
+          </section>
         </div>
-      </section>
+      </div>
+    </main>
+  );
+}
 
-      <style jsx>{`
-        .btn-primary::after {
-          content: "";
-          position: absolute;
-          inset: 0;
-          background: #ff3131;
-          transform: translateX(-101%);
-          transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-          z-index: -1;
-        }
+function SectionIntro({
+  label,
+  title,
+  description,
+}: {
+  label: string;
+  title: string;
+  description: string;
+}) {
+  return (
+    <div className="max-w-4xl">
+      <div className="mb-5 flex items-center gap-3 font-(--font-space-mono) text-[11px] uppercase tracking-[4px] text-[#9B5EFF]">
+        <span className="block h-0.5 w-8 bg-[#9B5EFF]" />
+        {label}
+      </div>
+      <h2 className="font-(--font-anton) text-[clamp(38px,5vw,74px)] uppercase leading-[0.95] tracking-[-1px]">
+        {title}
+      </h2>
+      {description ? (
+        <p className="mt-6 max-w-170 text-[16px] font-light leading-8 text-[#c6c2bc]">
+          {description}
+        </p>
+      ) : null}
+    </div>
+  );
+}
 
-        .btn-primary:hover::after {
-          transform: translateX(0);
-        }
+function HeroMetric({
+  value,
+  label,
+  accent,
+}: {
+  value: string;
+  label: string;
+  accent: string;
+}) {
+  return (
+    <div>
+      <div
+        className="font-(--font-anton) text-[36px] leading-none"
+        style={{ color: accent }}
+      >
+        {value}
+      </div>
+      <div className="mt-2 font-(--font-space-mono) text-[10px] uppercase tracking-[2px] text-[#8f8b85]">
+        {label}
+      </div>
+    </div>
+  );
+}
 
-        .athlete-card-hero {
-          animation: floatCard 4s ease-in-out infinite;
-        }
+function FeatureCard({
+  accent,
+  label,
+  title,
+  description,
+}: {
+  accent: string;
+  label: string;
+  title: string;
+  description: string;
+}) {
+  return (
+    <div
+      className="border border-[rgba(245,240,232,0.10)] bg-[rgba(245,240,232,0.04)] p-5 backdrop-blur-[10px]"
+      style={{ borderTop: `4px solid ${accent}` }}
+    >
+      <div
+        className="font-(--font-space-mono) text-[10px] uppercase tracking-[2px]"
+        style={{ color: accent }}
+      >
+        {label}
+      </div>
+      <div className="mt-4 font-(--font-anton) text-[28px] uppercase leading-none tracking-[0.4px]">
+        {title}
+      </div>
+      <p className="mt-4 text-[15px] font-light leading-7 text-[#c6c2bc]">
+        {description}
+      </p>
+    </div>
+  );
+}
 
-        .managers-marquee {
-          animation: marquee 25s linear infinite;
-        }
+function HowItWorksCard({
+  number,
+  accent,
+  title,
+  description,
+}: {
+  number: string;
+  accent: string;
+  title: string;
+  description: string;
+}) {
+  return (
+    <div className="relative overflow-hidden border border-[rgba(245,240,232,0.08)] bg-[rgba(245,240,232,0.03)] px-9 py-12">
+      <div className="pointer-events-none absolute -right-5 -top-5 font-(--font-anton) text-[120px] leading-none opacity-[0.04]">
+        {number}
+      </div>
+      <div
+        className="mb-7 inline-flex px-3 py-2 font-(--font-space-mono) text-[10px] uppercase tracking-[2px]"
+        style={{ backgroundColor: `${accent}1F`, color: accent }}
+      >
+        {number}
+      </div>
+      <h3 className="font-(--font-anton) text-[28px] uppercase leading-none tracking-[0.4px]">
+        {title}
+      </h3>
+      <p className="mt-5 text-[15px] font-light leading-7 text-[#c6c2bc]">
+        {description}
+      </p>
+    </div>
+  );
+}
 
-        @keyframes floatCard {
-          0%,
-          100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-10px);
-          }
-        }
+function StatementCard({
+  accent,
+  title,
+  body,
+}: {
+  accent: string;
+  title: string;
+  body: string;
+}) {
+  return (
+    <div
+      className="border border-[rgba(245,240,232,0.10)] bg-[rgba(245,240,232,0.03)] p-6"
+      style={{ borderTop: `4px solid ${accent}` }}
+    >
+      <h3 className="font-(--font-anton) text-[32px] uppercase leading-none tracking-[0.4px]">
+        {title}
+      </h3>
+      <p className="mt-5 text-[15px] font-light leading-7 text-[#c6c2bc]">
+        {body}
+      </p>
+    </div>
+  );
+}
 
-        @keyframes marquee {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
+function RewardCard({ title }: { title: string }) {
+  return (
+    <div className="border border-[rgba(245,240,232,0.10)] bg-[rgba(245,240,232,0.03)] p-5">
+      <div className="font-(--font-anton) text-[28px] uppercase leading-none tracking-[0.4px]">
+        {title}
+      </div>
+    </div>
+  );
+}
 
-        @media (max-width: 1024px) {
-          :global(body) {
-            cursor: auto;
-          }
-        }
-      `}</style>
+function StatPill({
+  label,
+  value,
+  accent,
+}: {
+  label: string;
+  value: string;
+  accent: string;
+}) {
+  return (
+    <div className="border border-[rgba(245,240,232,0.08)] bg-[rgba(245,240,232,0.025)] px-4 py-4">
+      <div className="font-(--font-space-mono) text-[10px] uppercase tracking-[1.8px] text-[#9c9892]">
+        {label}
+      </div>
+      <div
+        className="mt-2 font-(--font-anton) text-[30px] leading-none"
+        style={{ color: accent }}
+      >
+        {value}
+      </div>
+    </div>
+  );
+}
+
+function MetricCard({
+  label,
+  value,
+  accent,
+}: {
+  label: string;
+  value: string;
+  accent: string;
+}) {
+  return (
+    <div className="border border-[rgba(245,240,232,0.08)] bg-[rgba(245,240,232,0.03)] px-5 py-4">
+      <div className="font-(--font-space-mono) text-[10px] uppercase tracking-[2px] text-[#9c9892]">
+        {label}
+      </div>
+      <div
+        className="mt-2 font-(--font-anton) text-[34px] leading-none"
+        style={{ color: accent }}
+      >
+        {value}
+      </div>
     </div>
   );
 }

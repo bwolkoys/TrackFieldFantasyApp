@@ -17,6 +17,7 @@ type Athlete = {
   event: string;
   height: string;
   weight: string;
+  score: number;
   bestStatLabel: string;
   bestStatValue: string;
   bestStatMeaning: string;
@@ -34,6 +35,7 @@ const athletes: Athlete[] = [
     event: "400m Hurdles",
     height: `6'3"`,
     weight: "170 lbs",
+    score: 24,
     bestStatLabel: "Best Recent Time",
     bestStatValue: "46.82",
     bestStatMeaning: "A world-class hurdles mark and the kind of time that can win global finals.",
@@ -49,6 +51,7 @@ const athletes: Athlete[] = [
     event: "400m Hurdles",
     height: `6'2"`,
     weight: "176 lbs",
+    score: 23,
     bestStatLabel: "Best Recent Time",
     bestStatValue: "46.70",
     bestStatMeaning: "An elite hurdle time that signals real title-winning form.",
@@ -64,6 +67,7 @@ const athletes: Athlete[] = [
     event: "400m / 400m Hurdles",
     height: `5'9"`,
     weight: "132 lbs",
+    score: 20,
     bestStatLabel: "Best Recent Time",
     bestStatValue: "50.68",
     bestStatMeaning: "A very strong 400m performance that highlights elite speed and range.",
@@ -79,6 +83,7 @@ const athletes: Athlete[] = [
     event: "Shot Put",
     height: `6'0"`,
     weight: "295 lbs",
+    score: 12,
     bestStatLabel: "Best Recent Mark",
     bestStatValue: "22.68m",
     bestStatMeaning: "A huge shot put result that keeps him competitive for wins at elite meets.",
@@ -94,6 +99,7 @@ const athletes: Athlete[] = [
     event: "Long Jump",
     height: `5'4"`,
     weight: "128 lbs",
+    score: 13,
     bestStatLabel: "Best Recent Mark",
     bestStatValue: "7.07m",
     bestStatMeaning: "An elite long jump distance that puts her right in the mix at world-class meets.",
@@ -109,6 +115,7 @@ const athletes: Athlete[] = [
     event: "Discus",
     height: `6'0"`,
     weight: "170 lbs",
+    score: 11,
     bestStatLabel: "Best Recent Mark",
     bestStatValue: "69.80m",
     bestStatMeaning: "A massive discus throw that shows true world-level form.",
@@ -124,6 +131,7 @@ const athletes: Athlete[] = [
     event: "100m / 200m",
     height: `5'11"`,
     weight: "154 lbs",
+    score: 16,
     bestStatLabel: "Best Recent Time",
     bestStatValue: "19.52",
     bestStatMeaning: "An elite 200m time and one of the clearest signs of top-end sprint form.",
@@ -139,6 +147,7 @@ const athletes: Athlete[] = [
     event: "200m / 100m",
     height: `5'9"`,
     weight: "128 lbs",
+    score: 15,
     bestStatLabel: "Best Recent Time",
     bestStatValue: "21.78",
     bestStatMeaning: "A world-class 200m result that makes her a major sprint scorer.",
@@ -154,6 +163,7 @@ const athletes: Athlete[] = [
     event: "5000m / 10,000m",
     height: `5'11"`,
     weight: "132 lbs",
+    score: 8,
     bestStatLabel: "Best Recent Time",
     bestStatValue: "12:46.96",
     bestStatMeaning: "A top-level distance mark showing he can hang with the best over long races.",
@@ -169,9 +179,10 @@ const athletes: Athlete[] = [
     event: "1500m / Mile",
     height: `6'0"`,
     weight: "150 lbs",
+    score: 9,
     bestStatLabel: "Best Recent Time",
     bestStatValue: "3:31.12",
-    bestStatMeaning: "A strong middle-distance result that puts him in the conversation at elite meets.",
+    bestStatMeaning: "A strong middle-distance result that keeps him in the conversation at elite meets.",
     insight: "Tactical racer with a strong kick and good fan-watchability.",
     nextEventMeet: "Rome Diamond League",
     nextEventName: "1500m Final",
@@ -184,6 +195,7 @@ const athletes: Athlete[] = [
     event: "Shot Put",
     height: `6'7"`,
     weight: "320 lbs",
+    score: 7,
     bestStatLabel: "Best Recent Mark",
     bestStatValue: "22.91m",
     bestStatMeaning: "A huge throw that makes him one of the strongest field-event anchors possible.",
@@ -199,6 +211,7 @@ const athletes: Athlete[] = [
     event: "Pole Vault",
     height: `5'11"`,
     weight: "181 lbs",
+    score: 14,
     bestStatLabel: "Best Recent Mark",
     bestStatValue: "6.05m",
     bestStatMeaning: "An elite vault that gives this roster serious field-event firepower.",
@@ -214,6 +227,7 @@ const athletes: Athlete[] = [
     event: "Pole Vault",
     height: `6'1"`,
     weight: "154 lbs",
+    score: 8,
     bestStatLabel: "Best Recent Mark",
     bestStatValue: "4.80m",
     bestStatMeaning: "A high-end vault that makes her a dependable medal-level threat.",
@@ -229,6 +243,7 @@ const athletes: Athlete[] = [
     event: "Heptathlon",
     height: `6'0"`,
     weight: "160 lbs",
+    score: 10,
     bestStatLabel: "Best Recent Score",
     bestStatValue: "6423 pts",
     bestStatMeaning: "A strong all-around total showing she contributes across multiple disciplines.",
@@ -244,6 +259,7 @@ const athletes: Athlete[] = [
     event: "100m",
     height: `5'3"`,
     weight: "121 lbs",
+    score: 9,
     bestStatLabel: "Best Recent Time",
     bestStatValue: "10.80",
     bestStatMeaning: "A fast 100m sprint that makes her an immediate scoring factor.",
@@ -261,84 +277,41 @@ export default function TeamRaiPage() {
       className={`${anton.variable} ${dmSans.variable} ${spaceMono.variable} min-h-screen bg-[#0a0a0a] text-[#f5f0e8] font-(--font-dm-sans)`}
     >
       <div className="relative isolate overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 opacity-70">
-          <svg viewBox="0 0 1600 1200" className="h-full w-full">
-            <defs>
-              <radialGradient id="teamGlowRai" cx="74%" cy="18%" r="50%">
-                <stop offset="0%" stopColor="rgba(0,210,106,0.22)" />
-                <stop offset="45%" stopColor="rgba(59,127,255,0.10)" />
-                <stop offset="100%" stopColor="rgba(10,10,10,0)" />
-              </radialGradient>
-            </defs>
-            <rect width="1600" height="1200" fill="url(#teamGlowRai)" />
-            <g fill="none" stroke="rgba(245,240,232,0.07)" strokeWidth="1.2">
-              <path d="M1310 -40 Q1040 300 1160 1240" />
-              <path d="M1400 -40 Q1130 300 1250 1240" />
-              <path d="M1220 -40 Q950 300 1070 1240" />
-            </g>
-          </svg>
-        </div>
-
-        <div className="pointer-events-none absolute -right-[10%] -top-[10%] h-[120%] w-[34%] -skew-x-[8deg] bg-[rgba(0,210,106,0.04)]" />
-
         <div className="relative mx-auto max-w-7xl px-6 py-8 md:px-10 lg:px-12">
           <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
-            <Link
-              href="/dashboard-fans"
-              className="font-(--font-space-mono) text-[11px] uppercase tracking-[2px] text-[#00D26A] transition-colors hover:text-[#f5f0e8]"
-            >
-              Back to Fan Dashboard
-            </Link>
-
             <div className="rounded-full bg-[rgba(0,210,106,0.14)] px-4 py-2 font-(--font-space-mono) text-[10px] uppercase tracking-[2px] text-[#00D26A]">
               Team Rai
             </div>
+            <Link href="/dashboard-fans" className="font-(--font-space-mono) text-[11px] uppercase tracking-[2px] text-[#00D26A] transition-colors hover:text-[#f5f0e8]">
+              Back to Fan Dashboard
+            </Link>
           </div>
 
           <section className="border border-[rgba(245,240,232,0.12)] bg-[rgba(245,240,232,0.04)] p-6 backdrop-blur-[10px] sm:p-8">
-            <div className="flex flex-col gap-8 xl:flex-row xl:items-end xl:justify-between">
-              <div>
-                <div className="mb-5 flex items-center gap-3 font-(--font-space-mono) text-[11px] uppercase tracking-[4px] text-[#00D26A]">
-                  <span className="block h-0.5 w-8 bg-[#00D26A]" />
-                  Fan Team View
-                </div>
-
-                <h1 className="font-(--font-anton) text-[clamp(40px,6vw,88px)] uppercase leading-[0.92] tracking-[-1px]">
-                  <span className="block">Team</span>
-                  <span className="block text-[#00D26A]">Rai</span>
-                </h1>
-
-                <p className="mt-4 font-(--font-space-mono) text-[11px] uppercase tracking-[2px] text-[#b8b4ae]">
-                  Managed by Rai Benjamin
-                </p>
-
-                <p className="mt-5 max-w-170 text-[16px] font-light leading-7 text-[#c6c2bc]">
-                  A balanced, championship-style roster with high-end hurdlers, elite field-event athletes, and several stars who can score across different disciplines.
-                  This version helps casual fans understand the athletes at a glance.
-                </p>
-              </div>
-
-              <div className="grid gap-4 sm:grid-cols-3">
-                <InfoMetric label="Roster Size" value="15" accent="#00D26A" />
-                <InfoMetric label="Fans Following" value="3,524" accent="#9B5EFF" />
-                <InfoMetric label="Team Style" value="Depth" accent="#3B7FFF" />
-              </div>
+            <h1 className="font-(--font-anton) text-[clamp(40px,6vw,88px)] uppercase leading-[0.92] tracking-[-1px]">
+              <span className="block">Team</span>
+              <span className="block text-[#00D26A]">Rai</span>
+            </h1>
+            <p className="mt-4 font-(--font-space-mono) text-[11px] uppercase tracking-[2px] text-[#b8b4ae]">
+              Managed by Rai Benjamin
+            </p>
+            <p className="mt-5 max-w-170 text-[16px] font-light leading-7 text-[#c6c2bc]">
+              A balanced, championship-style roster with high-end hurdlers, elite field-event athletes, and several stars who can score across different disciplines.
+            </p>
+            <div className="mt-5 inline-flex items-center gap-2 bg-[rgba(0,210,106,0.14)] px-3 py-2 font-(--font-space-mono) text-[10px] uppercase tracking-[2px] text-[#00D26A]">
+              Top 10 athletes count toward team score
             </div>
           </section>
 
           <section className="mt-8 grid gap-4">
             {athletes.map((athlete, index) => (
-              <article
-                key={athlete.name}
-                className="border border-[rgba(245,240,232,0.10)] bg-[rgba(245,240,232,0.03)] p-5 sm:p-6"
-              >
+              <article key={athlete.name} className="border border-[rgba(245,240,232,0.10)] bg-[rgba(245,240,232,0.03)] p-5 sm:p-6">
                 <div className="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
                   <div className="xl:max-w-110">
                     <div className="mb-3 flex flex-wrap items-center gap-3">
                       <div className="bg-[rgba(0,210,106,0.14)] px-3 py-2 font-(--font-space-mono) text-[10px] uppercase tracking-[2px] text-[#00D26A]">
                         Athlete {String(index + 1).padStart(2, "0")}
                       </div>
-
                       <div className="border border-[rgba(245,240,232,0.12)] px-3 py-2 font-(--font-space-mono) text-[10px] uppercase tracking-[2px] text-[#b8b4ae]">
                         {athlete.category}
                       </div>
@@ -351,6 +324,13 @@ export default function TeamRaiPage() {
                     <p className="mt-3 font-(--font-space-mono) text-[11px] uppercase tracking-[2px] text-[#00D26A]">
                       {athlete.event}
                     </p>
+
+                    <div className="mt-4 inline-flex items-center gap-2 bg-[rgba(0,210,106,0.14)] px-3 py-2 font-(--font-space-mono) text-[10px] uppercase tracking-[2px] text-[#00D26A]">
+                      Season Score
+                      <span className="font-(--font-anton) text-[22px] leading-none text-[#f5f0e8]">
+                        +{athlete.score}
+                      </span>
+                    </div>
 
                     <div className="mt-4 flex flex-wrap gap-3">
                       <span className="border border-[rgba(245,240,232,0.12)] px-3 py-2 font-(--font-space-mono) text-[10px] uppercase tracking-[1.5px] text-[#b8b4ae]">
@@ -412,26 +392,5 @@ export default function TeamRaiPage() {
         </div>
       </div>
     </main>
-  );
-}
-
-function InfoMetric({
-  label,
-  value,
-  accent,
-}: {
-  label: string;
-  value: string;
-  accent: string;
-}) {
-  return (
-    <div className="border border-[rgba(245,240,232,0.08)] bg-[rgba(245,240,232,0.03)] px-5 py-4">
-      <div className="font-(--font-space-mono) text-[10px] uppercase tracking-[2px] text-[#9c9892]">
-        {label}
-      </div>
-      <div className="mt-2 font-(--font-anton) text-[30px] leading-none" style={{ color: accent }}>
-        {value}
-      </div>
-    </div>
   );
 }

@@ -3,17 +3,18 @@
 import Link from "next/link";
 import { Anton, DM_Sans, Space_Mono } from "next/font/google";
 
-const anton = Anton({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-anton",
-});
+const anton = Anton({ subsets: ["latin"], weight: "400", variable: "--font-anton" });
 const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-dm-sans" });
 const spaceMono = Space_Mono({
   subsets: ["latin"],
   weight: ["400", "700"],
   variable: "--font-space-mono",
 });
+
+type AthleteScore = {
+  name: string;
+  score: number;
+};
 
 type Team = {
   id: string;
@@ -22,7 +23,8 @@ type Team = {
   accent: string;
   fanCount: number;
   rank: number;
-  athletes: string[];
+  teamScore: number;
+  athletes: AthleteScore[];
 };
 
 const teams: Team[] = [
@@ -33,22 +35,23 @@ const teams: Team[] = [
     accent: "#9B5EFF",
     fanCount: 4821,
     rank: 1,
+    teamScore: 124,
     athletes: [
-      "Mondo Duplantis",
-      "Cole Hocker",
-      "Katie Moon",
-      "Rai Benjamin",
-      "Ryan Crouser",
-      "Grant Fisher",
-      "Anna Hall",
-      "Gabby Thomas",
-      "Melissa Jefferson-Wooden",
-      "Emmanouil Karalis",
-      "Joe Kovacs",
-      "Tara Davis-Woodhall",
-      "Noah Lyles",
-      "Karsten Warholm",
-      "Valarie Allman",
+      { name: "Mondo Duplantis", score: 28 },
+      { name: "Cole Hocker", score: 22 },
+      { name: "Katie Moon", score: 18 },
+      { name: "Rai Benjamin", score: 24 },
+      { name: "Ryan Crouser", score: 20 },
+      { name: "Grant Fisher", score: 12 },
+      { name: "Anna Hall", score: 15 },
+      { name: "Gabby Thomas", score: 19 },
+      { name: "Melissa Jefferson-Wooden", score: 11 },
+      { name: "Emmanouil Karalis", score: 9 },
+      { name: "Joe Kovacs", score: 10 },
+      { name: "Tara Davis-Woodhall", score: 13 },
+      { name: "Noah Lyles", score: 17 },
+      { name: "Karsten Warholm", score: 14 },
+      { name: "Valarie Allman", score: 8 },
     ],
   },
   {
@@ -58,22 +61,23 @@ const teams: Team[] = [
     accent: "#FF3131",
     fanCount: 4360,
     rank: 2,
+    teamScore: 118,
     athletes: [
-      "Gabby Thomas",
-      "Noah Lyles",
-      "Rai Benjamin",
-      "Cole Hocker",
-      "Katie Moon",
-      "Sha'Carri Richardson",
-      "Josh Kerr",
-      "Ryan Crouser",
-      "Anna Hall",
-      "Grant Holloway",
-      "Yared Nuguse",
-      "Tara Davis-Woodhall",
-      "Grant Fisher",
-      "Mondo Duplantis",
-      "Joe Kovacs",
+      { name: "Gabby Thomas", score: 26 },
+      { name: "Noah Lyles", score: 25 },
+      { name: "Rai Benjamin", score: 18 },
+      { name: "Cole Hocker", score: 14 },
+      { name: "Katie Moon", score: 12 },
+      { name: "Sha'Carri Richardson", score: 21 },
+      { name: "Josh Kerr", score: 17 },
+      { name: "Ryan Crouser", score: 11 },
+      { name: "Anna Hall", score: 10 },
+      { name: "Grant Holloway", score: 16 },
+      { name: "Yared Nuguse", score: 13 },
+      { name: "Tara Davis-Woodhall", score: 9 },
+      { name: "Grant Fisher", score: 8 },
+      { name: "Mondo Duplantis", score: 15 },
+      { name: "Joe Kovacs", score: 7 },
     ],
   },
   {
@@ -83,22 +87,23 @@ const teams: Team[] = [
     accent: "#3B7FFF",
     fanCount: 3988,
     rank: 3,
+    teamScore: 110,
     athletes: [
-      "Noah Lyles",
-      "Gabby Thomas",
-      "Melissa Jefferson-Wooden",
-      "Kenny Bednarek",
-      "Fred Kerley",
-      "Rai Benjamin",
-      "Josh Kerr",
-      "Cole Hocker",
-      "Grant Holloway",
-      "Ryan Crouser",
-      "Valarie Allman",
-      "Tara Davis-Woodhall",
-      "Katie Moon",
-      "Anna Hall",
-      "Grant Fisher",
+      { name: "Noah Lyles", score: 27 },
+      { name: "Gabby Thomas", score: 19 },
+      { name: "Melissa Jefferson-Wooden", score: 16 },
+      { name: "Kenny Bednarek", score: 18 },
+      { name: "Fred Kerley", score: 17 },
+      { name: "Rai Benjamin", score: 12 },
+      { name: "Josh Kerr", score: 11 },
+      { name: "Cole Hocker", score: 10 },
+      { name: "Grant Holloway", score: 14 },
+      { name: "Ryan Crouser", score: 8 },
+      { name: "Valarie Allman", score: 15 },
+      { name: "Tara Davis-Woodhall", score: 9 },
+      { name: "Katie Moon", score: 7 },
+      { name: "Anna Hall", score: 11 },
+      { name: "Grant Fisher", score: 6 },
     ],
   },
   {
@@ -108,22 +113,23 @@ const teams: Team[] = [
     accent: "#00D26A",
     fanCount: 3524,
     rank: 4,
+    teamScore: 102,
     athletes: [
-      "Rai Benjamin",
-      "Karsten Warholm",
-      "Noah Lyles",
-      "Gabby Thomas",
-      "Sydney McLaughlin-Levrone",
-      "Grant Fisher",
-      "Cole Hocker",
-      "Ryan Crouser",
-      "Joe Kovacs",
-      "Mondo Duplantis",
-      "Katie Moon",
-      "Anna Hall",
-      "Tara Davis-Woodhall",
-      "Melissa Jefferson-Wooden",
-      "Valarie Allman",
+      { name: "Rai Benjamin", score: 24 },
+      { name: "Karsten Warholm", score: 23 },
+      { name: "Noah Lyles", score: 16 },
+      { name: "Gabby Thomas", score: 15 },
+      { name: "Sydney McLaughlin-Levrone", score: 20 },
+      { name: "Grant Fisher", score: 8 },
+      { name: "Cole Hocker", score: 9 },
+      { name: "Ryan Crouser", score: 7 },
+      { name: "Joe Kovacs", score: 12 },
+      { name: "Mondo Duplantis", score: 14 },
+      { name: "Katie Moon", score: 8 },
+      { name: "Anna Hall", score: 10 },
+      { name: "Tara Davis-Woodhall", score: 13 },
+      { name: "Melissa Jefferson-Wooden", score: 9 },
+      { name: "Valarie Allman", score: 11 },
     ],
   },
 ];
@@ -164,13 +170,10 @@ export default function ManagerDashboardPage() {
               <h1 className="font-(--font-anton) text-[clamp(44px,6vw,88px)] uppercase leading-[0.92] tracking-[-1px]">
                 <span className="block">Team</span>
                 <span className="block text-[#9B5EFF]">Selection</span>
-                <span className="block text-transparent [WebkitTextStroke:2px_#f5f0e8]">
-                  Overview
-                </span>
+                <span className="block text-transparent [WebkitTextStroke:2px_#f5f0e8]">Overview</span>
               </h1>
               <p className="mt-5 max-w-170 text-[16px] font-light leading-7 text-[#c6c2bc]">
-                Review the four active teams, check each 15-athlete roster, and
-                see how many fans have selected each team to follow.
+                Review the four active teams, check each 15-athlete roster, and see how many fans have selected each team to follow.
               </p>
             </div>
 
@@ -179,21 +182,13 @@ export default function ManagerDashboardPage() {
                 href="/"
                 className="inline-flex items-center justify-center border border-[rgba(245,240,232,0.16)] px-5 py-3.5 font-(--font-space-mono) text-[11px] uppercase tracking-[2px] text-[#f5f0e8] transition-colors hover:border-[#f5f0e8] hover:text-[#9B5EFF]"
               >
-                Home Page
+                Back to Homepage
               </Link>
 
               <div className="grid gap-4 sm:grid-cols-3">
-                <MetricCard label="Active Teams" value="4" accent="#9B5EFF" />
-                <MetricCard
-                  label="Total Athletes"
-                  value="60"
-                  accent="#FF3131"
-                />
-                <MetricCard
-                  label="Total Fan Picks"
-                  value="16,693"
-                  accent="#3B7FFF"
-                />
+                <MetricCard label="Available Teams" value="4" accent="#9B5EFF" />
+                <MetricCard label="Managers" value="4" accent="#FF3131" />
+                <MetricCard label="Season Selection" value="Open" accent="#3B7FFF" />
               </div>
             </div>
           </header>
@@ -214,10 +209,7 @@ export default function ManagerDashboardPage() {
                     <div>
                       <div
                         className="mb-3 inline-flex items-center gap-2 px-3 py-2 font-(--font-space-mono) text-[10px] uppercase tracking-[2px]"
-                        style={{
-                          backgroundColor: `${team.accent}1F`,
-                          color: team.accent,
-                        }}
+                        style={{ backgroundColor: `${team.accent}1F`, color: team.accent }}
                       >
                         Rank #{team.rank}
                       </div>
@@ -229,18 +221,15 @@ export default function ManagerDashboardPage() {
                       </p>
                     </div>
 
-                    <div className="grid min-w-[52.5 gap-3 sm:grid-cols-2 md:grid-cols-1">
-                      <StatPill
-                        label="Fans Picking Team"
-                        value={team.fanCount.toLocaleString()}
-                        accent={team.accent}
-                      />
-                      <StatPill
-                        label="Athletes On Roster"
-                        value={team.athletes.length.toString()}
-                        accent={team.accent}
-                      />
+                    <div className="grid min-w-52.5 gap-3 sm:grid-cols-2 md:grid-cols-1">
+                      <StatPill label="Team Score" value={team.teamScore.toString()} accent={team.accent} />
+                      <StatPill label="Fans Picking Team" value={team.fanCount.toLocaleString()} accent={team.accent} />
+                      <StatPill label="Athletes On Roster" value={team.athletes.length.toString()} accent={team.accent} />
                     </div>
+                  </div>
+
+                  <div className="font-(--font-space-mono) text-[10px] uppercase tracking-[1.6px] text-[#8f8b85]">
+                    Top 10 athletes count toward total team score
                   </div>
 
                   <div>
@@ -259,22 +248,29 @@ export default function ManagerDashboardPage() {
                     <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
                       {team.athletes.map((athlete, index) => (
                         <div
-                          key={athlete}
-                          className="flex items-center gap-3 border border-[rgba(245,240,232,0.08)] bg-[rgba(245,240,232,0.025)] px-3 py-3"
+                          key={athlete.name}
+                          className="flex items-center justify-between gap-3 border border-[rgba(245,240,232,0.08)] bg-[rgba(245,240,232,0.025)] px-3 py-3"
                         >
-                          <div
-                            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[10px] font-bold uppercase tracking-[1px] text-[#0a0a0a]"
-                            style={{ backgroundColor: team.accent }}
-                          >
-                            {String(index + 1).padStart(2, "0")}
+                          <div className="flex items-center gap-3 min-w-0">
+                            <div
+                              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[10px] font-bold uppercase tracking-[1px] text-[#0a0a0a]"
+                              style={{ backgroundColor: team.accent }}
+                            >
+                              {String(index + 1).padStart(2, "0")}
+                            </div>
+                            <div className="min-w-0">
+                              <div className="truncate font-(--font-space-mono) text-[11px] uppercase tracking-[1.3px] text-[#f5f0e8]">
+                                {athlete.name}
+                              </div>
+                              <div className="mt-1 text-xs text-[#8f8b85]">Track &amp; Field Athlete</div>
+                            </div>
                           </div>
-                          <div className="min-w-0">
-                            <div className="truncate font-(--font-space-mono) text-[11px] uppercase tracking-[1.3px] text-[#f5f0e8]">
-                              {athlete}
-                            </div>
-                            <div className="mt-1 text-xs text-[#8f8b85]">
-                              Track &amp; Field Athlete
-                            </div>
+
+                          <div
+                            className="shrink-0 font-(--font-anton) text-[22px] leading-none"
+                            style={{ color: team.accent }}
+                          >
+                            +{athlete.score}
                           </div>
                         </div>
                       ))}
@@ -291,9 +287,7 @@ export default function ManagerDashboardPage() {
                 <div className="mb-3 font-(--font-space-mono) text-[11px] uppercase tracking-[2px] text-[#9B5EFF]">
                   Quick Actions
                 </div>
-                <h2 className="font-(--font-anton) text-[32px] uppercase leading-none">
-                  Manager Tools
-                </h2>
+                <h2 className="font-(--font-anton) text-[32px] uppercase leading-none">Manager Tools</h2>
               </div>
 
               <div className="flex flex-wrap gap-3">
@@ -332,10 +326,7 @@ function MetricCard({
       <div className="font-(--font-space-mono) text-[10px] uppercase tracking-[2px] text-[#9c9892]">
         {label}
       </div>
-      <div
-        className="mt-2 font-(--font-anton) text-[34px] leading-none"
-        style={{ color: accent }}
-      >
+      <div className="mt-2 font-(--font-anton) text-[34px] leading-none" style={{ color: accent }}>
         {value}
       </div>
     </div>
@@ -356,10 +347,7 @@ function StatPill({
       <div className="font-(--font-space-mono) text-[10px] uppercase tracking-[1.8px] text-[#9c9892]">
         {label}
       </div>
-      <div
-        className="mt-2 font-(--font-anton) text-[30px] leading-none"
-        style={{ color: accent }}
-      >
+      <div className="mt-2 font-(--font-anton) text-[30px] leading-none" style={{ color: accent }}>
         {value}
       </div>
     </div>
